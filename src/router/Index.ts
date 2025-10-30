@@ -12,6 +12,11 @@ let list=
         name:"login",
         path:"/login",
         component: () => import("../views/LoginPage.vue")
+    },
+    {
+        name:"crud",
+        path:"/AdminPage",
+        component: () => import("../views/AdminCRUDPage.vue")
     }
 ]
 

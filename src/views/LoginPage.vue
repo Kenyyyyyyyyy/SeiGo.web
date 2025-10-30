@@ -56,7 +56,10 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { ElMessage, type FormInstance, type FormRules } from 'element-plus'
+import store from '../store/index' 
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 // --- 表单实例 ---
 const ruleFormRef = ref<FormInstance>()
 
@@ -85,6 +88,8 @@ const onSubmit = async (ruleFormRef: FormInstance | undefined) => {
   await ruleFormRef.validate(async (valid, fields) => {
     if (valid) {
       ElMessage.success('表单验证通过，准备提交登录...')
+      store().EditUserId(1)
+      router.push('/AdminPage')
       // 在这里执行你的登录逻辑...
     } 
     else 
@@ -105,21 +110,29 @@ const onSubmit = async (ruleFormRef: FormInstance | undefined) => {
 
 <style scoped lang="scss">
 .login {
-  height: 100%;
+  min-height: 100vh; /* 覆盖原来的 100% 更可靠 */
   width: 100%;
+  display: flex;
+  align-items: stretch;
 }
 
 .container {
-  height: 100%;
+  flex: 1;
   width: 100%;
   text-align: center;
-  display: flex; 
+  display: flex;
+  flex-wrap: nowrap; /* 大屏并排，窄屏改为换行 */
+  align-items: stretch;
+  gap: 24px;
+  padding: 24px;
+  box-sizing: border-box;
 }
 
-/* 左侧 6 */
+/* 左侧 大屏 6 */
 .left {
-  flex: 6;
-  background: #1f8ef1; /* 左侧背景色，可按需修改 */
+  flex: 6 1 0%;
+  min-width: 320px;
+  background: #1f8ef1;
   color: #fff;
   display: flex;
   flex-direction: column;
@@ -127,31 +140,34 @@ const onSubmit = async (ruleFormRef: FormInstance | undefined) => {
   justify-content: center;
   padding: 82px;
   border-radius: 8px;
+  box-sizing: border-box;
 }
 
-.brand{
+.brand {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-bottom: 40px;
 }
 
-/* 右侧 4 */
+/* 右侧 大屏 4 */
 .right {
-  flex: 4;
-  background: #f8f9fb; /* 右侧背景色，可按需修改 */
+  flex: 4 1 0%;
+  min-width: 320px;
+  background: #f8f9fb;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 40px;
   border-radius: 8px;
+  box-sizing: border-box;
 }
 
 /* 卡片与表单基础样式 */
 .login-card {
   width: 100%;
-  max-width: 900px;
-  padding: 90px;
+  max-width: 720px; /* 桌面上限制最大宽度 */
+  padding: 64px;
   box-sizing: border-box;
 }
 .card-title { margin: 0 0 18px; font-size: 18px; text-align: center; }
@@ -160,6 +176,47 @@ const onSubmit = async (ruleFormRef: FormInstance | undefined) => {
 
 /* 保持图片和品牌基础样式 */
 .brand-title { font-size: 22px; font-weight: 700; margin: 0; }
-.boxbg { width: 100%; height: auto;  object-fit: cover; }
+.boxbg { width: 100%; height: auto; object-fit: cover; max-height: 420px; }
+
+/* 响应式：当宽度较小时，左右列纵向排列 */
+@media (max-width: 1024px) {
+  .container {
+    flex-wrap: wrap;
+    padding: 20px;
+  }
+  .left, .right {
+    flex: 1 1 100%;
+    min-width: 0;
+    border-radius: 8px;
+  }
+  .left {
+    padding: 48px 28px;
+  }
+  .right {
+    padding: 28px 20px;
+  }
+  .login-card {
+    max-width: 640px;
+    padding: 48px;
+  }
+  .boxbg { max-height: 320px; }
+}
+
+/* 小屏优化：减少内边距、隐藏装饰图或缩小文字 */
+@media (max-width: 600px) {
+  .container { gap: 12px; padding: 12px; }
+  .left { padding: 24px 16px; }
+  .right { padding: 16px 12px; }
+  .login-card { padding: 20px; max-width: 420px; }
+  .brand-title { font-size: 18px; }
+  .card-title { font-size: 16px; }
+  .boxbg { display: none; } /* 可选：在非常小的屏幕隐藏左侧大图，节省空间 */
+}
+
+/* 极小屏幕再微调 */
+@media (max-width: 420px) {
+  .brand-title { font-size: 16px; }
+  .login-card { padding: 16px; }
+  .submitBtn { font-size: 14px; }
+}
 </style>
-// ...existing code...
