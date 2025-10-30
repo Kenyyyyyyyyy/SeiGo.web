@@ -15,6 +15,5 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 }
 
 
-app.use(createPinia().use(piniaPluginPersistedstate)) // 使用 Pinia 并启用持久化插件
 app.use(router)
 app.mount('#app')
