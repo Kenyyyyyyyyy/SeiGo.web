@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 
-const stroe = defineStore("counterStore", {
+const store = defineStore("counterStore", {
     state: () => ({
         userId: 0,
     }),
@@ -11,8 +11,12 @@ const stroe = defineStore("counterStore", {
         },
     },
 
-    persist: true,
+    persist: {
+        key: "site",
+        storage: localStorage,
+        pick: ["userId"],
+    },
 });
 
-export default stroe;
+export default store;
 
