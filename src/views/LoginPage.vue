@@ -1,20 +1,16 @@
 <template>
   <div class="login">
     <div class="container">
-      <!-- 左侧：展示图文/品牌 -->
       <div class="left">
         <div class="brand">
           <el-image style="width: 64px; height: 64px" :src="logoUrl" fit="fit" />
-          <h1 class="brand-title">SeiGou    AdminLoginPage</h1>
+          <h1 class="brand-title">SeiGou AdminLoginPage</h1>
         </div>
-
         <div class="hero">
           <el-image class="boxbg" :src="boxBgUrl" fit="cover" />
-          
         </div>
       </div>
 
-      <!-- 右侧：登录表单，垂直水平居中 -->
       <div class="right">
         <el-card class="login-card" shadow="always">
           <h2 class="card-title">系统登录</h2>
@@ -28,7 +24,7 @@
             :rules="rules"
             ref="ruleFormRef"
           >
-            <el-form-item label="用户名" prop="userName">
+            <el-form-item label="用户名 (邮箱)" prop="userName">
               <el-input v-model="form.userName" />
             </el-form-item>
 
@@ -42,7 +38,12 @@
             </el-form-item>
 
             <el-form-item>
-              <el-button class="submitBtn" type="primary" @click="onSubmit(ruleFormRef)">
+              <el-button
+                class="submitBtn"
+                type="primary"
+                :loading="loading" 
+                @click="onSubmit(ruleFormRef)"
+              >
                 登录
               </el-button>
             </el-form-item>
@@ -56,55 +57,80 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { ElMessage, type FormInstance, type FormRules } from 'element-plus'
-import store from '../store/index' 
+// 修改：导入新的 authStore
+import { useAuthStore } from '../store/authStore'
 import { useRouter } from 'vue-router'
+import { onMounted } from 'vue'
 
 const router = useRouter()
+// 实例化 authStore
+const authStore = useAuthStore()
+
+onMounted(() => {
+  if (authStore.isAuthenticated) {
+    router.push('/AdminPage')
+  }
+})
+
 // --- 表单实例 ---
 const ruleFormRef = ref<FormInstance>()
 
 // --- 表单数据 ---
 const form = reactive({
-  userName: '',
+  userName: '', // 这将被用作 useremail
   password: '',
 })
 
 // --- 表单验证规则 ---
 const rules = reactive<FormRules>({
-  userName: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+  userName: [{ required: true, message: '请输入用户名或邮箱', trigger: 'blur' }],
   password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
 })
 
+// --- 状态 ---
+const loading = ref(false) // 新增：登录加载状态
+
 // --- 图片路径占位符 ---
-// 你需要把这些替换成你自己的图片资源路径，例如从 @/assets/ 导入
 const logoUrl = ref('https://element-plus.org/images/element-plus-logo.svg')
-const boxBgUrl = ref('/public/bg.jpg')
+const boxBgUrl = ref('/bg.jpg') // 假设 bg.jpg 在 public 目录下
 
 
-// --- 提交方法 ---
-const onSubmit = async (ruleFormRef: FormInstance | undefined) => {
-  if (!ruleFormRef) return
-  
-  await ruleFormRef.validate(async (valid, fields) => {
-    if (valid) {
-      ElMessage.success('表单验证通过，准备提交登录...')
-      store().EditUserId(1)
-      router.push('/AdminPage')
-      // 在这里执行你的登录逻辑...
-    } 
-    else 
-    {
-      let errors :string = ""
-      fields?.userName?.forEach((msg) => {
-        errors += msg.message + ';'
-      });
-      fields?.password?.forEach((msg) => {
-        errors += msg.message + ';'
-      });
-      ElMessage.error('表单验证失败: ' + errors)
+// --- 提交方法 (已重写) ---
+const onSubmit = async (formEl: FormInstance | undefined) => {
+  if (!formEl || loading.value) return // 防止重复提交
 
+  try {
+    // 1. 直接 await 验证。如果失败，会抛出错误并进入 catch 块
+    await formEl.validate()
+
+    // 2. 如果代码执行到这里，说明验证通过
+    loading.value = true // 开始加载
+    
+    // 3. 单独的 try/finally 块处理 API 调用
+    try {
+      const success = await authStore.login({
+        useremail: form.userName,
+        userpwd: form.password,
+      })
+      
+      if (success) {
+        ElMessage.success('登录成功！')
+        router.push('/AdminPage') // 跳转到你的后台页面
+      } else {
+        ElMessage.error('登录失败，请检查用户名或密码。')
+      }
+    } catch (apiError) {
+      ElMessage.error('登录时发生意外错误。')
+      console.error(apiError)
+    } finally {
+      loading.value = false // 无论 API 成功或失败，都结束加载
     }
-  })
+
+  } catch (validationError) {
+    // 4. 如果验证失败，会在这里捕获
+    ElMessage.error('请正确填写表单。')
+    console.log('表单验证失败:', validationError)
+  }
 }
 </script>
 

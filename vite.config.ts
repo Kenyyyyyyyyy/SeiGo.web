@@ -16,7 +16,23 @@ export default defineConfig({
     })
   ],
 
+  // ... (plugins 部分保持不变) ...
+
   server:{
-    open: true
+    open: true,
+    proxy:{
+
+      '^/api/.*': {
+        target: 'https://localhost:44388', // 你的数据后端
+        changeOrigin: true,
+        secure: false,
+      },
+      '/uploads': {
+        target: 'https://localhost:44388', // 你的 WebApi 后端 (它有 wwwroot)
+        changeOrigin: true,
+        secure: false,
+      }
+    }
   }
 })
+

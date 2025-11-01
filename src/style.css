@@ -27,16 +27,7 @@ a:hover {
 }
 
 
-/* ↓↓↓ 这是唯一需要的样式 ↓↓↓
-  删除 Vite 默认的 body 和 #app 规则
-  只保留这一个
-*/
-body {
-  margin: 0;
-}
 
-
-/* ... button, .card, @media 等样式可以保留 ... */
 
 button {
   border-radius: 8px;
