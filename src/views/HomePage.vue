@@ -255,8 +255,9 @@ const heroItems = [
   text-decoration: none;
   font-weight: 300;
   /* 字体更细 */
-  font-size: 1.2 rem;
-  /* 字体更小 */
+  font-size: 1rem;
+   /* 字体更小 */
+   margin-left: 10px;
 }
 
 .navbar-right a:hover {
@@ -679,5 +680,94 @@ const heroItems = [
 .copyright p {
   margin: 0;
   line-height: 1.4; /* 调整行高 */
+}
+</style>
+
+<style>
+/* 针对小屏幕（手机）的样式 */
+@media (max-width: 767px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar-left {
+    margin-bottom: 10px;
+  }
+
+  .navbar-right {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar-right a {
+    margin-left: 0;
+    margin-bottom: 5px;
+  }
+
+  .hero {
+    height: 60vh;
+  }
+
+  .hero-overlay h2 {
+    font-size: 1.8rem;
+  }
+
+  .hero-overlay p {
+    font-size: 1rem;
+  }
+
+  .memorial-text {
+    font-size: 2.5rem;
+    top: 60%;
+    left: 10%;
+  }
+
+  .cards {
+    padding: 40px 5%;
+  }
+
+  .cards .section-title {
+    font-size: 1.8rem;
+  }
+
+  .news {
+    padding: 40px 5%;
+  }
+
+  .news-title {
+    font-size: 1.8rem;
+  }
+
+  .footer {
+    padding: 30px 5%;
+    text-align: center;
+  }
+
+  .footer-row-1 {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-row-2 {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .copyright {
+    text-align: center;
+  }
+}
+
+/* 针对中等屏幕（平板电脑）的样式 */
+@media (min-width: 768px) and (max-width: 991px) {
+  .hero-overlay h2 {
+    font-size: 2rem;
+  }
+
+  .memorial-text {
+    font-size: 3rem;
+  }
 }
 </style>
