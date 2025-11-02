@@ -227,12 +227,14 @@ const resetForm = () => {
 
 const handleCoverSuccess: UploadProps['onSuccess'] = (response, _uploadFile) => {
   if (response.resultCode === 200) {
-    form.coverImageUrl = response.resultData;
+    form.coverImageUrl = response.resultData.url;
     formRef.value?.validateField('coverImageUrl');
+    ElMessage.success('封面上传成功！');
   } else {
     ElMessage.error(response.message || '封面上传失败');
   }
 };
+
 
 const beforeImageUpload: UploadProps['beforeUpload'] = (rawFile) => {
   if (rawFile.type !== 'image/jpeg' && rawFile.type !== 'image/png') {
