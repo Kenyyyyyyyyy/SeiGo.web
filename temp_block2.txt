@@ -1,0 +1,174 @@
+<style>
+@media (max-width: 767px) {
+  .news-item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .news-item-date {
+    order: 1;
+    width: 100%;
+  }
+
+  .news-item-category {
+    order: 2;
+    width: 100%;
+  }
+
+  .news-item-link {
+    order: 3;
+    width: 100%;
+  }
+}
+</style>
+
+<style>
+@media (max-width: 767px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 4%;
+  }
+
+  .navbar-left {
+    margin-bottom: 10px;
+  }
+
+  .navbar-right {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar-right a {
+    margin: 5px 10px 5px 0;
+    font-size: 0.95rem;
+    line-height: 1.2;
+    padding: 6px 0;
+  }
+
+  .nav-icon {
+    margin-right: 10px;
+  }
+
+  .logo {
+    height: 44px;
+  }
+
+  .hero {
+    height: 60vh;
+    flex-direction: column;
+    margin-top: 161px;
+  }
+
+  .hero-item {
+    width: 100%;
+    flex: none;
+  }
+
+  .hero-overlay h2 {
+    font-size: clamp(1.2rem, 5vw, 1.8rem);
+  }
+
+  .hero-overlay p {
+    font-size: clamp(0.9rem, 3.5vw, 1.1rem);
+  }
+
+  .cards {
+    margin-top: 0 !important ;
+    margin-bottom: 0 !important ;
+    margin-left: 0 !important ;
+    margin-right: 0 !important ;
+  }
+
+  .cards .section-title {
+    font-size: 1.8rem;
+    margin-top: 20px !important ;
+    margin-bottom: 20px !important ;
+  }
+
+ .el-row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    justify-content: center;
+  }
+
+  /* 让列在小屏时占满宽度 */
+  .el-col {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* 卡片整体宽高比例优化 */
+  .card-item {
+    width: 94%;
+    margin: 0 auto;
+  }
+
+
+  /* 图片区域比例更自然（�?3:2 �?4:3�?*/
+  .card-img-container {
+    aspect-ratio: 4 / 3;
+    height: auto;
+  }
+
+  .card-img {
+    object-fit: cover;
+  }
+
+  /* 内容区域 padding 适配 */
+  .card-content {
+    padding: 14px 16px;
+  }
+
+  .card-content h3 {
+    font-size: 1.1rem;
+    margin-bottom: 6px;
+  }
+
+  .card-content p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  /* 调整按钮在小屏时不挤�?*/
+  .card-button-overlay {
+    padding: 10px 14px;
+    font-size: 0.9rem;
+  }
+
+
+
+  .news {
+    padding: 0px !important;
+    margin-bottom: 30px !important ;
+  }
+
+  .news-title {
+    font-size: 1.8rem;
+    margin-bottom: 10px !important ;
+  }
+
+  .footer {
+    padding: 30px 5%;
+    text-align: center;
+  }
+
+  .footer-row-1,
+  .footer-row-2 {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .copyright {
+    text-align: center;
+  }
+
+  .memorial img {
+    width: 100%;
+    height: auto;
+  }
+}
+</style>

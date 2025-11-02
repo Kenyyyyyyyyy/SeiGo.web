@@ -1,0 +1,23 @@
+<style>
+@media (max-width: 767px) {
+  .news-item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .news-item-date {
+    order: 1;
+    width: 100%;
+  }
+
+  .news-item-category {
+    order: 2;
+    width: 100%;
+  }
+
+  .news-item-link {
+    order: 3;
+    width: 100%;
+  }
+}
+</style>

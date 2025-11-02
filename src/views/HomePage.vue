@@ -5,15 +5,19 @@
         <img src="/images/seigou.jpg" alt="Logo" class="logo" />
       </div>
       <nav class="navbar-right">
-        <a href="#">団体の方へ &nbsp;>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-        <a href="#">&nbsp;個人の方へ &nbsp;>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-        <a href="#">&nbsp;団体情報 &nbsp;&nbsp;>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-        <a href="#" class="nav-icon">
-          <el-icon>
-            <Search />
-          </el-icon>
-        </a>
-        <a href="/login" class="global-site">Login</a>
+        <div class="navbar-links">
+          <a href="#">団体の方へ </a>
+          <a href="#">個人の方へ </a>
+          <a href="#">団体情報 </a>
+        </div>
+        <div class="navbar-actions">
+          <a href="#" class="nav-icon">
+            <el-icon>
+              <Search />
+            </el-icon>
+          </a>
+          <a href="/login" class="global-site">Login</a>
+        </div>
       </nav>
     </header>
 
@@ -35,94 +39,108 @@
     </section>
 
     <section class="cards">
-  <h2 class="section-title">活動・プロジェクト</h2>
+      <h2 class="section-title">活動・プロジェクト</h2>
 
-  <el-row :gutter="40" v-loading="isLoadingActivities">
-    <el-col
-      :xs="24"
-      :sm="12"
-      :md="12" 
-      class="card-wrapper"
-      v-for="activity in activities" 
-      :key="activity.id" 
-    >
-      <el-card class="card-item" shadow="hover">
-        <div class="card-img-container">
-          <img :src="activity.coverImageUrl" class="card-img" />
+      <el-row :gutter="40" v-loading="isLoadingActivities">
+        <el-col :xs="24" :sm="12" :md="12" class="card-wrapper" v-for="activity in activities" :key="activity.id">
+          <el-card class="card-item" shadow="hover">
+            <div class="card-img-container">
+              <img :src="activity.coverImageUrl" class="card-img" />
 
-          <a :href="`/blog/${activity.id}`" class="card-button-overlay">
-            詳しくはこちら <span class="arrow">></span>
-          </a>
-        </div>
-        <div class="card-content">
-          <h3>{{ activity.title }}</h3>
-          <p>{{ activity.summary }}</p>
-        </div>
-      </el-card>
-    </el-col>
-  </el-row>
-</section>
+              <a :href="`/blog/${activity.id}`" class="card-button-overlay">
+                詳しくはこちら <span class="arrow">></span>
+              </a>
+            </div>
+            <div class="card-content">
+              <h3>{{ activity.title }}</h3>
+              <p>{{ activity.summary }}</p>
+            </div>
+          </el-card>
+        </el-col>
+      </el-row>
+    </section>
 
     <section class="news">
-  
-  <div class="news-title-container">
-    <h2 class="news-title">ニュース</h2>
-    <el-icon class="news-icon"><Rss /></el-icon>
-  </div>
 
-  <el-table
-    :data="newsList" 
-    style="width: 100%"
-    :header-row-class-name="'hidden-header'"
-    v-loading="isLoadingNews" 
-  >
-    <el-table-column prop="date" label="日付" width="160" />
-    <el-table-column prop="category" label="简介" width="120">
-      <template #default="scope">
-        <span class="category-badge">{{ scope.row.category }}</span>
-      </template>
-    </el-table-column>
-    <el-table-column prop="title" label="タイトル">
-      <template #default="scope">
-        <a href="#" class="news-item-link">
-          {{ scope.row.title }}
-          <el-icon v-if="scope.row.type === 'external'"><TopRight /></el-icon>
-          <el-icon v-else><ArrowRight /></el-icon>
-        </a>
-      </template>
-    </el-table-column>
-  </el-table>
+      <div class="news-title-container">
+        <h2 class="news-title">ニュース</h2>
+        <el-icon class="news-icon">
+          <Rss />
+        </el-icon>
+      </div>
 
-  <div class="news-link">
-    <a href="#">ニュース一覧 ></a>
-  </div>
-</section>
+      <el-table :data="newsList" style="width: 100%" :header-row-class-name="'hidden-header'" v-loading="isLoadingNews">
+        <el-table-column prop="date" label="日付" width="160" />
+        <el-table-column prop="category" label="简介" width="120">
+          <template #default="scope">
+            <span class="category-badge">{{ scope.row.category }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="title" label="タイトル">
+          <template #default="scope">
+            <a href="#" class="news-item-link">
+              {{ scope.row.title }}
+              <el-icon v-if="scope.row.type === 'external'">
+                <TopRight />
+              </el-icon>
+              <el-icon v-else>
+                <ArrowRight />
+              </el-icon>
+            </a>
+          </template>
+        </el-table-column>
+      </el-table>
+
+      <div class="news-list-mobile">
+        <div class="news-item" v-for="item in newsList" :key="item.title">
+          <!-- ✅ 新增容器 -->
+          <div class="news-item-header">
+            <div class="news-item-date">{{ item.date }}</div>
+            <div class="news-item-category">{{ item.category }}</div>
+          </div>
+
+          <a href="#" class="news-item-link">
+            {{ item.title }}
+            <el-icon v-if="item.type === 'external'">
+              <TopRight />
+            </el-icon>
+            <el-icon v-else>
+              <ArrowRight />
+            </el-icon>
+          </a>
+        </div>
+      </div>
+
+      <div class="news-link">
+        <a href="#">ニュース一覧 ></a>
+      </div>
+    </section>
 
     <footer class="footer">
-  
-  <div class="footer-row-1">
-    <a href="#">ニュース</a>
-    <a href="#">サイト更新情報</a>
-    <a href="#">RSSについて</a>
-    <a href="#">ソーシャルメディアアカウント</a>
-  </div>
-  
-  <div class="footer-divider"></div>
-  
-  <div class="footer-row-2">
-    <div class="footer-links-secondary">
-      <a href="#">お問い合わせ</a>
-      <a href="#">個人情報保護について</a>
-      <a href="#">利用規約</a>
-      <a href="#">クッキーノーティス</a>
-    </div>
-    <div class="copyright">
-      <p>東京青合クラブ</p>
-      <p>© 2025 TOKYO SEIGO CLUB</p>
-    </div>
-  </div>
 
-</footer>
+      <div class="footer-row-1">
+        <a href="#">ニュース</a>
+        <a href="#">サイト更新情報</a>
+        <a href="#">RSSについて</a>
+        <a href="#">ソーシャルメディアアカウント</a>
+      </div>
+
+      <div class="footer-divider"></div>
+
+      <div class="footer-row-2">
+        <div class="footer-links-secondary">
+          <a href="#">お問い合わせ</a>
+          <a href="#">個人情報保護について</a>
+          <a href="#">利用規約</a>
+          <a href="#">クッキーノーティス</a>
+        </div>
+        <div class="copyright">
+          <p>東京青合クラブ</p>
+          <p>© 2025 TOKYO SEIGO CLUB</p>
+        </div>
+      </div>
+
+    </footer>
   </div>
 </template>
 
@@ -172,15 +190,15 @@ onMounted(async () => {
     // (!!!) 2. 并行获取两个接口 (!!!)
     const [newsData, activitiesData] = await Promise.all([
       getLatestNews(1, 10),
-      getPinnedBlogs() 
+      getPinnedBlogs()
     ]);
 
     // (处理 News... 逻辑不变)
     newsList.value = newsData.map(blog => ({
       date: formatNewsDate(blog.displayDate),
-      category: blog.typeName || '未分类', 
+      category: blog.typeName || '未分类',
       title: blog.title,
-      type: 'internal' 
+      type: 'internal'
     }));
 
     // (!!!) 3. 处理 Activities (!!!)
@@ -215,31 +233,24 @@ const heroItems = [
   color: #333;
 }
 
-/* --- ① 顶部导航栏 (已修改) --- */
+/* 顶部导航栏 */
 .navbar {
-  /* 关键：使用 absolute 布局使其浮动在顶部 */
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* 内边距和透明黑色背景 */
   padding: 15px 5%;
-  background-color: rgba(0, 0, 0, 0.4);
-  /* 黑色半透明 */
+  background-color: #000;
   color: white;
   z-index: 10;
-  /* 确保在最上层 */
   box-sizing: border-box;
-  /* 避免 padding 影响宽度 */
 }
 
-/* 新增：Logo 图片样式 */
 .logo {
   height: 70px;
-  /* 根据你的 logo 调整 */
   width: auto;
 }
 
@@ -250,43 +261,31 @@ const heroItems = [
 
 .navbar-right a {
   color: white;
-  margin-left: 20px;
-  /* 减小间距 */
   text-decoration: none;
   font-weight: 300;
-  /* 字体更细 */
   font-size: 1rem;
-   /* 字体更小 */
-   margin-left: 10px;
+  margin-left: 10px;
 }
 
 .navbar-right a:hover {
   color: #f4d03f;
 }
 
-/* 新增：搜索图标样式 */
 .nav-icon {
   font-size: 1.2rem;
   vertical-align: middle;
 }
 
-/* 新增：Global Site 样式 (带左侧竖线) */
 .global-site {
   border-left: 1px solid #ccc;
   padding-left: 20px;
 }
 
-/* --- 结束修改 --- */
-
-
-/* --- ② Hero Section (已修改) --- */
+/* Hero Section */
 .hero {
   display: flex;
   width: 100%;
-  /* 修改：使用 vh (视口高度) 代替固定 px，使其更高 */
   height: 80vh;
-  /* min-height: 500px; */
-  /* 可以添加最小高度 */
 }
 
 .hero-item {
@@ -300,15 +299,12 @@ const heroItems = [
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* 自动居中并裁剪填充 */
   filter: brightness(60%);
-  /* 调暗一点以突出文字 */
   transition: transform 0.5s, filter 0.3s;
 }
 
 .hero-item:hover .hero-img {
   transform: scale(1.05);
-  /* 悬停时轻微放大 */
   filter: brightness(75%);
 }
 
@@ -320,43 +316,34 @@ const heroItems = [
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: clamp(10px, 3vw, 40px);
   text-align: center;
 }
 
-/* 新增：Hero 区域文字样式 (带阴影) */
 .hero-overlay h2 {
-  font-size: 2.5rem;
-  /* 调整大小 */
+  font-size: clamp(1.6rem, 5vw, 2.8rem);
   font-weight: 700;
-  letter-spacing: 1px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
-  /* 添加阴影 */
+  letter-spacing: clamp(0.5px, 0.6vw, 2px);
+  line-height: clamp(1.1, 1.3, 1.4);
+  text-shadow: 0 clamp(1px, 0.4vw, 2px) clamp(3px, 0.8vw, 5px) rgba(0, 0, 0, 0.6);
 }
 
 .hero-overlay p {
-  font-size: 1.1rem;
-  margin-top: 10px;
+  font-size: clamp(0.9rem, 3vw, 1.2rem);
+  margin-top: clamp(5px, 1.5vw, 15px);
   font-weight: 500;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
-  /* 添加阴影 */
+  line-height: 1.4;
+  text-shadow: 0 clamp(1px, 0.3vw, 2px) clamp(2px, 0.7vw, 4px) rgba(0, 0, 0, 0.6);
 }
 
-/* 新增：为 subtitle 添加箭头 */
 .hero-overlay p::after {
   content: ' >';
   font-weight: bold;
-  margin-left: 5px;
+  margin-left: 0.4em;
+  font-size: 1em;
 }
 
-/* --- 结束修改 --- */
-
-
-/* ③ 中部图片与标题 */
-/* ③ 中部图片与标题 (已修改) */
-/* ③ 中部图片与标题 (样式已按新要求修改) */
-
-/* .memorial 和 .memorial img 的样式保持上次修改不变 */
+/* 纪念图 */
 .memorial {
   position: relative;
   margin: 0;
@@ -370,36 +357,26 @@ const heroItems = [
   vertical-align: bottom;
 }
 
-/* 重点：替换这个样式 */
 .memorial-text {
   position: absolute;
   color: white;
-
-  /* 2. 修改：定位到 "中间偏左" */
-  top: 70%;
-  left: 20%;
-  /* 调整这个百分比来控制 "偏左" 的程度 */
-  transform: translateY(-50%);
-  /* 配合 top: 50% 实现垂直居中 */
-
-  /* 1. 修改：字体大小更大 */
-  font-size: 3.5rem;
-  /* 之前是 2.2rem，已大幅增大 */
-
-  /* 3. 修改：使用日式衬线体 (明朝体) */
-  font-family: 'Yu Mincho', 'YuMincho', 'Hiragino Mincho ProN', 'MS PMincho', 'Noto Serif JP', serif;
-  font-kerning: inherit;
-  /* 启用字体字距调整 */
+  top: clamp(45%, 65%, 70%);
+  left: clamp(10%, 18vw, 22%);
+  font-size: clamp(1.2rem, 5vw, 3.5rem);
+  line-height: clamp(1.2, 1.6vw, 1.8);
+  font-weight: 400;
+  font-family: 'Yu Mincho', 'YuMincho', 'Hiragino Mincho ProN',
+    'MS PMincho', 'Noto Serif JP', serif;
   font-style: oblique;
-
-
-  line-height: 1.6;
-  /* 调整行间距 */
-  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+  font-kerning: inherit;
+  letter-spacing: clamp(0.5px, 0.6vw, 2px);
+  text-shadow: 0 clamp(1px, 0.5vw, 2px) clamp(4px, 1vw, 5px) rgba(0, 0, 0, 0.7);
+  transform: translateY(-50%);
 }
 
-/* ④ 活动卡片 */
-/* ④ 活动卡片 (已修改) */
+
+/* 活动卡片区域 */
+/* 活動・プロジェクト整体 */
 .cards {
   padding: 80px 10%;
   /* 增加上下内边距 */
@@ -417,9 +394,8 @@ const heroItems = [
 }
 
 .el-row {
-  margin-left: -20px !important;
-  /* 调整 el-row 负 margin，适应 gutter */
-  margin-right: -20px !important;
+  margin: 0 !important  ;
+  
 }
 
 .card-wrapper {
@@ -429,13 +405,12 @@ const heroItems = [
   /* 让 el-col 内部的 card-item 也能撑满高度 */
 }
 
-
 .card-item {
   width: 100%;
   /* 确保卡片撑满列宽 */
   text-align: left;
   /* 默认左对齐 */
-  padding: 0;
+  padding: 20px ;
   /* 移除 el-card 默认 padding */
   border-radius: 8px;
   /* 圆角 */
@@ -517,21 +492,19 @@ const heroItems = [
   /* 箭头更大一点 */
 }
 
+/* 新闻区 */
+.news-list-mobile {
+  display: none;
+}
 
-
-/* ⑤ 新闻区 */
-/* ⑤ 新闻区 (已修改) */
 .news {
   padding: 60px 10%;
   background: #fff;
-  /* 移除 text-align: center */
 }
 
-/* 新增：标题容器 */
 .news-title-container {
   position: relative;
   text-align: center;
-  margin-bottom: 30px;
 }
 
 .news-title {
@@ -541,7 +514,6 @@ const heroItems = [
   color: #333;
 }
 
-/* 新增：RSS 图标样式 */
 .news-icon {
   position: absolute;
   top: 50%;
@@ -551,13 +523,10 @@ const heroItems = [
   color: #555;
 }
 
-/* 新增：隐藏表头 (Requirement 1) */
-/* 使用 :deep() 来穿透 el-table 的样式 */
 :deep(.hidden-header) {
   display: none;
 }
 
-/* 新增：类别徽章 (Requirement 2) */
 .category-badge {
   background-color: #eee;
   color: #555;
@@ -566,10 +535,8 @@ const heroItems = [
   font-size: 0.75rem;
   font-weight: 600;
   white-space: nowrap;
-  /* 防止换行 */
 }
 
-/* 新增：行链接样式 */
 .news-item-link {
   color: #333;
   text-decoration: none;
@@ -578,7 +545,6 @@ const heroItems = [
 
 .news-item-link:hover {
   color: #007bff;
-  /* 悬停颜色 */
 }
 
 .news-item-link .el-icon {
@@ -588,14 +554,11 @@ const heroItems = [
   color: #888;
 }
 
-/* 修改：新闻列表链接 (Requirement 4) */
 .news-link {
   margin-top: 30px;
-  margin-left: 20px;
+  margin-left: 44px;
   text-align: left;
-  /* 改为左对齐 */
   font-weight: 600;
-
 }
 
 .news-link a {
@@ -607,88 +570,275 @@ const heroItems = [
   color: #007bff;
 }
 
-/* 移除 el-table 默认的底部边框，使其更干净 */
 .el-table {
   --el-table-border-color: transparent;
 }
 
-/* 移除 el-table 单元格的内边距，使其更紧凑 */
+:deep(.el-table__row) {
+  height: 50px; /* ✅ 默认约 44px，调高行距 */
+}
+
 :deep(.el-table__cell) {
   padding: 8px 0;
 }
 
-/* ⑥ 页脚 */
-/* ⑥ 页脚 (已修改) */
+/* 页脚 */
 .footer {
   background: #111;
   color: #ccc;
-  /* 匹配其他区域的左右内边距 */
-  padding: 40px 10%; 
-  /* 移除 text-align: center */
-  text-align: left; 
+  padding: 40px 10%;
+  text-align: left;
 }
 
-/* 上排链接 */
 .footer-row-1 {
   display: flex;
   justify-content: flex-start;
-  flex-wrap: wrap; /* 允许换行 */
-  gap: 25px; 
+  flex-wrap: wrap;
+  gap: 25px;
 }
 
-/* 所有页脚链接的通用样式 */
 .footer a {
   color: #ccc;
   text-decoration: none;
-  font-size: 0.85rem; /* 字体更小 */
-  font-weight: 300; /* 字体更细 */
+  font-size: 0.85rem;
+  font-weight: 300;
   transition: color 0.2s;
 }
+
 .footer a:hover {
   color: white;
 }
 
-/* 分割线 */
 .footer-divider {
-  border-top: 1px solid #333; /* 分割线颜色 */
-  margin: 20px 0; /* 上下间距 */
+  border-top: 1px solid #333;
+  margin: 20px 0;
 }
 
-/* 下排容器 */
 .footer-row-2 {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start; /* 顶部对齐 */
-  flex-wrap: wrap; /* 允许换行 */
-  gap: 20px; /* 链接和版权之间的最小间距 */
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
-/* 下排左侧链接 */
 .footer-links-secondary {
   display: flex;
-  flex-wrap: wrap; /* 允许换行 */
-  gap: 20px; /* 链接之间的间距 */
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
-/* 下排右侧版权 */
 .copyright {
   text-align: right;
   font-size: 0.8rem;
   color: #aaa;
-  white-space: nowrap; /* 防止版权信息自身换行 */
+  white-space: nowrap;
 }
+
 .copyright p {
   margin: 0;
-  line-height: 1.4; /* 调整行高 */
+  line-height: 1.4;
 }
 </style>
 
-<style>
-/* 针对小屏幕（手机）的样式 */
+<style scoped>
+@media (max-width: 767px) {
+  .el-table {
+    display: none;
+  }
+
+  .news-list-mobile {
+    display: block;
+    padding: 0 10%;
+  }
+
+  .news-item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+  }
+
+  /* ✅ 日期 + 分类 同行排列 */
+  .news-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+
+  .news-item-date {
+    font-size: 0.8rem;
+    color: #888;
+  }
+
+  /* ✅ 分类按钮化 */
+  .news-item-category {
+    font-size: 0.75rem;
+    color: #007bff;
+    background-color: rgba(0, 123, 255, 0.1);
+    border: 1px solid #007bff;
+    padding: 2px 8px;
+    border-radius: 10px;
+    white-space: nowrap;
+  }
+
+  .news-item-link {
+    width: 100%;
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  .news-item-link:hover {
+    color: #007bff;
+  }
+
+  .copyright {
+    text-align: center;
+    /* ✅ 再次确认文字本身居中 */
+    width: 100%;
+    /* ✅ 占满父容器宽度以正确居中 */
+    font-size: 0.8rem;
+    color: #aaa;
+    line-height: 1.6;
+    margin-top: 10px;
+  }
+
+  .copyright p {
+    margin: 0;
+  }
+
+  .cards {
+    padding: 60px 6%; /* 与桌面端 80px 10% 成比例缩小 */
+    background: #f8f9fb;
+  }
+
+  /* 标题 */
+  .cards .section-title {
+    text-align: center;
+    margin-bottom: 40px; /* 桌面 50px → 稍小 */
+    font-size: 1.8rem; /* 桌面 2.2rem → 等比例缩放 */
+    font-weight: 700;
+    color: #333;
+  }
+
+  /* 卡片容器（单列排列） */
+  .el-row {
+    margin: 0 !important;
+    justify-content: center;
+  }
+
+  .el-col {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+
+  .card-wrapper {
+    margin-bottom: 10px; /* 桌面 40px → 轻微缩短 */
+    display: flex;
+    justify-content: center;
+  }
+
+  /* 卡片本体（保持桌面比例，但整体略缩） */
+  .card-item {
+    width: 95%;
+    text-align: left;
+    padding: 0px; /* 桌面 20px → 缩小比例 */
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .card-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+  }
+
+  /* 图片部分：保持高度比例一致 */
+  .card-img-container {
+    position: relative;
+    width: 100%;
+    height: 240px; /* 桌面 280px → 比例约 85% */
+    overflow: hidden;
+  }
+
+  .card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .card-item:hover .card-img {
+    transform: scale(1.05);
+  }
+
+  :deep(.el-card__body) {
+  padding: 20px 20px 0 20px !important;
+}
+
+  /* 内容部分：等比例缩放字体 */
+  .card-content {
+    padding: 10px; /* 桌面 20px */
+    padding-top: 0;
+  }
+
+  .card-content h3 {
+    font-size: 1.15rem; /* 桌面 1.3rem */
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+  }
+
+  .card-content p {
+    font-size: 0.9rem; /* 桌面 0.95rem */
+    line-height: 1.6;
+    color: #666;
+    min-height: 54px; /* 桌面 60px */
+  }
+
+  /* “詳しくはこちら >” 按钮 */
+  .card-button-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 12px 18px; /* 桌面 15px 20px */
+    font-size: 0.9rem; /* 桌面 0.95rem */
+    font-weight: 500;
+    text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s ease-in-out;
+  }
+
+  .card-button-overlay:hover {
+    background-color: rgba(0, 0, 0, 0.9);
+  }
+
+  .card-button-overlay .arrow {
+    font-weight: bold;
+    font-size: 1rem; /* 桌面 1.1rem */
+  }
+}
+</style>
+
+
+<style >
 @media (max-width: 767px) {
   .navbar {
     flex-direction: column;
     align-items: flex-start;
+    padding: 5px 4% !important;
   }
 
   .navbar-left {
@@ -701,73 +851,90 @@ const heroItems = [
   }
 
   .navbar-right a {
-    margin-left: 0;
-    margin-bottom: 5px;
+    margin: 5px 10px 5px 0;
+    font-size: 0.95rem;
+    line-height: 1.2;
+    padding: 6px 0;
+  }
+
+  .navbar-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    /* ✅ 搜索与登录之间用 gap 替代竖线 */
+  }
+
+  .nav-icon {
+    margin-right: 10px;
+  }
+
+  .logo {
+    height: 44px;
+    margin-top: 4px;
   }
 
   .hero {
     height: 60vh;
+    flex-direction: column;
+    margin-top: 163px;
+  }
+
+  .hero-item {
+    width: 100%;
+    flex: none;
   }
 
   .hero-overlay h2 {
-    font-size: 1.8rem;
+    font-size: clamp(1.2rem, 5vw, 1.8rem);
   }
 
   .hero-overlay p {
-    font-size: 1rem;
-  }
-
-  .memorial-text {
-    font-size: 2.5rem;
-    top: 60%;
-    left: 10%;
+    font-size: clamp(0.9rem, 3.5vw, 1.1rem);
   }
 
   .cards {
-    padding: 40px 5%;
+    margin-top: 0px !important;
+    margin-bottom: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding: 20px 0px !important;
   }
 
   .cards .section-title {
-    font-size: 1.8rem;
+    font-size: 22.4px !important;
+    margin-top: 0px !important;
+    margin-bottom: 20px !important;
   }
 
+  .el-row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    justify-content: center;
+  }
+
+  /* 让列在小屏时占满宽度 */
+  .el-col {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* 卡片整体宽高比例优化 */
+  
+
   .news {
-    padding: 40px 5%;
+    padding: 0px !important;
+    margin-bottom: 30px !important;
   }
 
   .news-title {
-    font-size: 1.8rem;
+    font-size: 22.4px !important;
+    margin-bottom: 10px !important;
   }
 
-  .footer {
-    padding: 30px 5%;
-    text-align: center;
-  }
 
-  .footer-row-1 {
-    flex-direction: column;
-    align-items: center;
-  }
 
-  .footer-row-2 {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .copyright {
-    text-align: center;
-  }
-}
-
-/* 针对中等屏幕（平板电脑）的样式 */
-@media (min-width: 768px) and (max-width: 991px) {
-  .hero-overlay h2 {
-    font-size: 2rem;
-  }
-
-  .memorial-text {
-    font-size: 3rem;
-  }
 }
 </style>

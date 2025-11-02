@@ -291,4 +291,118 @@ const beforeImageUpload: UploadProps['beforeUpload'] = (rawFile) => {
   height: auto;
   display: block;
 }
+
+@media (max-width: 767px) {
+  /* 整体容器 */
+  .create-blog-container {
+    padding: 16px;
+    margin: 0 auto;
+    max-width: 100%;
+  }
+
+  /* 顶部标题与返回按钮 */
+  .header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .header h1 {
+    font-size: 1.4rem;
+    margin: 0;
+  }
+
+  .header .el-button {
+    font-size: 0.9rem;
+    padding: 0;
+    color: var(--el-color-primary);
+  }
+
+  /* 卡片样式优化 */
+  .form-card {
+    padding: 16px 12px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  /* 表单整体 */
+  .el-form {
+    width: 100%;
+  }
+
+  /* 两栏合并为一栏 */
+  .el-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .el-col {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: none !important;
+  }
+
+  /* 表单项 */
+  .el-form-item {
+    margin-bottom: 16px;
+  }
+
+  /* 输入框与文字大小调整 */
+  .el-input__inner,
+  .el-textarea__inner {
+    font-size: 1rem;
+  }
+
+  /* 上传组件 */
+  .cover-uploader .el-upload {
+    width: 100%;
+    border-radius: 8px;
+  }
+
+  .uploader-icon {
+    width: 100%;
+    height: 150px;
+    font-size: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cover {
+    width: 100%;
+    border-radius: 8px;
+  }
+
+  /* 日期、选择器等输入组件宽度适配 */
+  .el-date-editor,
+  .el-select {
+    width: 100% !important;
+  }
+
+  /* 表单按钮区域 */
+  .form-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .form-actions .el-button {
+    width: 100%;
+    height: 44px;
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+
+  /* 立即创建按钮主色调 */
+  .form-actions .el-button--primary {
+    background-color: var(--el-color-primary);
+    border-color: var(--el-color-primary);
+  }
+}
+
 </style>
