@@ -1,12 +1,12 @@
 {
+
   "rewrites": [
     { "source": "/(.*)", "destination": "/" }
   ],
-  
   "env": {
     "VITE_API_BASE_URL": "https://seigou-webapi.onrender.com"
   },
   "buildCommand": "pnpm run build",
-  "outputDirectory": "dist"
+  "outputDirectory": "dist",
+  "framework": "vite"
 }
-
