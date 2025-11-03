@@ -775,6 +775,7 @@ const heroItems = [
     object-fit: cover;
     transition: transform 0.3s ease-in-out;
   }
+  
 
   .card-item:hover .card-img {
     transform: scale(1.05);
