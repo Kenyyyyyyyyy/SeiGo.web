@@ -65,13 +65,14 @@
 
             <el-form-item label="封面照片" prop="coverImageUrl">
               <el-upload
-                class="cover-uploader"
-                action="/api/FileUpload/UploadImage"
-                :headers="{ Authorization: `Bearer ${authStore.token}` }"
-                :show-file-list="false"
-                :on-success="handleCoverSuccess"
-                :before-upload="beforeImageUpload"
-              >
+  class="cover-uploader"
+  :action="uploadUrl"
+  :headers="{ Authorization: `Bearer ${authStore.token}` }"
+  :show-file-list="false"
+  :on-success="handleCoverSuccess"
+  :before-upload="beforeImageUpload"
+>
+
                 <img v-if="form.coverImageUrl" :src="form.coverImageUrl" class="cover" />
                 <el-icon v-else class="uploader-icon"><Plus /></el-icon>
               </el-upload>
@@ -178,6 +179,11 @@ onMounted(async () => {
     await fetchBlogData(blogId.value);
   }
 });
+
+const uploadUrl =
+  `${import.meta.env.VITE_API_BASE_URL || 'https://seigou-webapi.onrender.com'}/api/FileUpload/UploadImage`;
+console.log('[Upload URL]', uploadUrl);
+
 
 // --- (!!!) 5. 修正 onSubmit 逻辑 (!!!)
 const onSubmit = async () => {
