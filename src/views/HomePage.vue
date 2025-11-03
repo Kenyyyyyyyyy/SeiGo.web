@@ -263,8 +263,9 @@ const heroItems = [
   color: white;
   text-decoration: none;
   font-weight: 300;
-  font-size: 1rem;
+  font-size: 1.2rem;
   margin-left: 10px;
+  margin-right: 60px;
 }
 
 .navbar-right a:hover {
@@ -852,9 +853,10 @@ const heroItems = [
 
   .navbar-right a {
     margin: 5px 10px 5px 0;
-    font-size: 0.95rem;
+    font-size: 0.95rem !important;
     line-height: 1.2;
     padding: 6px 0;
+    margin-right: 20px !important;
   }
 
   .navbar-actions {
@@ -877,7 +879,7 @@ const heroItems = [
   .hero {
     height: 60vh;
     flex-direction: column;
-    margin-top: 163px;
+    margin-top: 161px;
   }
 
   .hero-item {
