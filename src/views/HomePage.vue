@@ -152,6 +152,7 @@
 import { ref, onMounted } from 'vue' // 1. 导入 computed
 // 2. 导入新图标
 import { Search, ArrowRight, TopRight } from "@element-plus/icons-vue";
+import { ElMessage } from 'element-plus'; // 导入 ElMessage
 
 import { getLatestNews, getPinnedBlogs } from '../http/blogService';
 
@@ -184,6 +185,15 @@ const isLoadingActivities = ref(true);
 
 // onMounted 会在组件加载时自动运行
 onMounted(async () => {
+  // 1. 显示日语提示消息 (10s 后消失)
+  ElMessage({
+    message: 'ご訪問ありがとうございます。トラフィック制限により、データが表示されない場合があります。現在バックエンドシステムを起動中です。30秒ほどお待ちください。',
+    type: 'warning',
+    duration: 10000, // 10 秒
+    showClose: false,
+    offset: 110, // 设置偏移量，使其出现在导航栏下方
+  });
+
   isLoadingNews.value = true;
   isLoadingActivities.value = true; // 1. 开始加载
 
