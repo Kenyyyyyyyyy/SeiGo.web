@@ -78,7 +78,7 @@
         </el-table-column>
         <el-table-column prop="title" label="タイトル">
           <template #default="scope">
-            <a href="#" class="news-item-link">
+            <a :href="`/blog/${scope.row.id}`" class="news-item-link">
               {{ scope.row.title }}
               <el-icon v-if="scope.row.type === 'external'">
                 <TopRight />
@@ -99,7 +99,7 @@
             <div class="news-item-category">{{ item.category }}</div>
           </div>
 
-          <a href="#" class="news-item-link">
+          <a :href="`/blog/${item.id}`" class="news-item-link">
             {{ item.title }}
             <el-icon v-if="item.type === 'external'">
               <TopRight />
@@ -160,6 +160,7 @@ import { getLatestNews, getPinnedBlogs } from '../http/blogService';
 
 
 interface NewsItem {
+  id: number; // 新增 id 字段
   date: string;
   category: string;
   title: string;
@@ -195,6 +196,7 @@ onMounted(async () => {
 
     // (处理 News... 逻辑不变)
     newsList.value = newsData.map(blog => ({
+      id: blog.id, // 确保 id 被传递
       date: formatNewsDate(blog.displayDate),
       category: blog.typeName || '未分类',
       title: blog.title,
