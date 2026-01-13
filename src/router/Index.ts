@@ -37,6 +37,18 @@ let list = [
         path: "/AdminPage/edit/:id",
         component: () => import("../views/CreateBlog.vue"),
         meta: { requiresAuth: true }
+    },
+    {
+        name: "ManageTypes",
+        path: "/AdminPage/manage-types", // 新增类型管理路径
+        component: () => import("../views/ManageTypes.vue"),
+        meta: { requiresAuth: true }
+    },
+    // (!!!) 新增博客详情页路由 (!!!)
+    {
+        name: "BlogDetail",
+        path: "/blog/:id",
+        component: () => import("../views/BlogDetailPage.vue")
     }
 ]
 

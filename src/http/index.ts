@@ -11,7 +11,7 @@ console.log('[Axios BaseURL]', baseURL);
 
 const axiosInstance = axios.create({
   baseURL,
-  timeout: 10000,
+  timeout: 60000, // 增加超时时间至 60 秒，以应对后端系统唤醒延迟
 });
 
 export default axiosInstance;

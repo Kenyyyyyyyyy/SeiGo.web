@@ -33,6 +33,13 @@
         </el-button>
       </router-link>
 
+      <router-link to="/AdminPage/manage-types">
+        <el-button type="default" size="large">
+          <el-icon><Files /></el-icon>
+          管理文章类型
+        </el-button>
+      </router-link>
+
     </div>
 
   </div>
