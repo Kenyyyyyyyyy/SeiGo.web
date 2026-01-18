@@ -4,7 +4,7 @@
       <div class="left">
         <div class="brand">
           <el-image style="width: 64px; height: 64px" :src="logoUrl" fit="fit" />
-          <h1 class="brand-title">SeiGou AdminLoginPage</h1>
+          <h1 class="brand-title">SeiGou LoginPage</h1>
         </div>
         <div class="hero">
           <el-image class="boxbg" :src="boxBgUrl" fit="cover" />
@@ -123,8 +123,8 @@ const onSubmit = async (formEl: FormInstance | undefined) => {
 }
 
 const onBack = () => {
-  router.back(); 
-};
+  router.push({ name: 'home' })
+}
 
 </script>
 

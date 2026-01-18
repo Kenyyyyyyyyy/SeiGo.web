@@ -3,12 +3,13 @@ import vue from '@vitejs/plugin-vue'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import path from 'path'
 
-// ✅ 读取环境变量（开发/生产不同）
+// ✅ 后端地址区分（开发 / 生产）
 const backendUrl =
   process.env.NODE_ENV === 'production'
-    ? 'https://seigou-webapi.onrender.com' // ✅ Render 生产后端地址
-    : 'https://localhost:44388';           // ✅ 本地开发时用 https://localhost:44388
+    ? 'https://seigou-webapi.onrender.com'
+    : 'https://localhost:44388'
 
 export default defineConfig({
   plugins: [
@@ -20,6 +21,13 @@ export default defineConfig({
       resolvers: [ElementPlusResolver({ importStyle: 'css' })],
     }),
   ],
+
+  // ✅ 关键：Vite 路径别名（解决 @/layout/Header.vue 报错）
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    },
+  },
 
   server: {
     open: true,
@@ -37,7 +45,7 @@ export default defineConfig({
     },
   },
 
-  // ✅ 构建时注入变量（Vercel 会自动读取）
+  // ✅ 构建时注入常量（前端可直接使用）
   define: {
     __BACKEND_URL__: JSON.stringify(backendUrl),
   },

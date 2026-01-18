@@ -1,26 +1,6 @@
 <template>
   <div class="blog-detail-page">
-    <!-- 导航栏 (从 HomePage.vue 复制) -->
-    <header class="navbar">
-      <div class="navbar-left">
-        <img src="/images/seigou.jpg" alt="Logo" class="logo" />
-      </div>
-      <nav class="navbar-right">
-        <div class="navbar-links">
-          <a href="#">団体の方へ </a>
-          <a href="#">個人の方へ </a>
-          <a href="#">団体情報 </a>
-        </div>
-        <div class="navbar-actions">
-          <a href="#" class="nav-icon">
-            <el-icon>
-              <Search />
-            </el-icon>
-          </a>
-          <a href="/login" class="global-site">Login</a>
-        </div>
-      </nav>
-    </header>
+    
 
     <!-- 博客详情内容区域 -->
     <main class="blog-content-main" v-loading="isLoading">
@@ -139,54 +119,6 @@ onMounted(async () => {
   color: #333;
 }
 
-/* 顶部导航栏 */
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 5%;
-  background-color: #000;
-  color: white;
-  z-index: 10;
-  box-sizing: border-box;
-}
-
-.logo {
-  height: 70px;
-  width: auto;
-}
-
-.navbar-right {
-  display: flex;
-  align-items: center;
-}
-
-.navbar-right a {
-  color: white;
-  text-decoration: none;
-  font-weight: 300;
-  font-size: 1.2rem;
-  margin-left: 10px;
-  margin-right: 60px;
-}
-
-.navbar-right a:hover {
-  color: #f4d03f;
-}
-
-.nav-icon {
-  font-size: 1.2rem;
-  vertical-align: middle;
-}
-
-.global-site {
-  border-left: 1px solid #ccc;
-  padding-left: 20px;
-}
 
 /* 页脚 */
 .footer {
@@ -305,8 +237,13 @@ onMounted(async () => {
 
 .blog-cover-image {
   width: 100%;
-  height: auto;
+  /* 将 height: auto 改为固定高度或 100% */
+  height: 400px; 
+  /* object-fit: cover 会确保图片比例不失真并填满空间 */
   object-fit: cover;
+  /* 确保图片以中心对齐，不会只看到头部 */
+  object-position: center; 
+  display: block;
 }
 
 .blog-html-content {

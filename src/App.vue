@@ -1,9 +1,25 @@
+<template>
+  <Header v-if="showHeader" />
+  <RouterView />
+</template>
+
 <script setup lang="ts">
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
+import Header from '@/layout/Header.vue'
+
+const route = useRoute()
+
+// App.vue
+const showHeader = computed(() => {
+  // 注意：'BlogDetail' 必须与路由配置中的 name 严格一致
+  const activeName = route.name as string
+  return ['home', 'BlogDetail'].includes(activeName)
+})
 </script>
 
-<template>
-  <router-view></router-view>
-</template>
+
+
 
 <style>
 html, body {

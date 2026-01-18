@@ -1,6 +1,12 @@
 import axiosInstance from '../http/index'; // 复用我们唯一的实例
 
 
+interface BackendBlogImage {
+  imageUrl: string
+  sortOrder: number
+  publicId: string
+}
+
 interface BackendBlog {
   id: number;
   title: string;
@@ -12,6 +18,7 @@ interface BackendBlog {
   content: string;
   typeId: number | null;
   pinnedTime: string | null;
+  images: BackendBlogImage[] 
 }
 
 interface BackendTypeInfo {
@@ -95,7 +102,7 @@ export const createBlog = async (formData: CreateBlogForm) => {
   try {
 
     const response = await axiosInstance.post(
-      '/api/BlogNews/CreatBlog', 
+      '/api/BlogNews/CreateBlog', 
       formData // <-- 直接发送 JS 对象
     );
     
@@ -139,7 +146,7 @@ export const getPaginatedBlogs = async (page: number, size: number) => {
 export const getBlogById = async (id: number) => {
   try {
     // (!!!) 使用正确的 API 路径 (!!!)
-    const response = await axiosInstance.get(`/api/BlogNews/GetBlogById/${id}`);
+    const response = await axiosInstance.get(`/api/BlogNews/GetBlogDetail/${id}`);
     if (response.data && response.data.resultCode === 200) {
       return response.data.resultData as BackendBlog;
     } else {
@@ -182,4 +189,8 @@ export const deleteBlog = async (id: number) => {
     console.error("API 调用失败:", error);
     return false;
   }
+};
+
+export const deleteImageApi = (publicId: string) => {
+  return axiosInstance.delete(`/api/FileUpload/DeleteImage`, { params: { publicId } });
 };

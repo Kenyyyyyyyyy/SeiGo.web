@@ -1,44 +1,31 @@
 <template>
   <div class="home">
-    <header class="navbar">
-      <div class="navbar-left">
-        <img src="/images/seigou.jpg" alt="Logo" class="logo" />
-      </div>
-      <nav class="navbar-right">
-        <div class="navbar-links">
-          <a href="#">団体の方へ </a>
-          <a href="#">個人の方へ </a>
-          <a href="#">団体情報 </a>
-        </div>
-        <div class="navbar-actions">
-          <a href="#" class="nav-icon">
-            <el-icon>
-              <Search />
-            </el-icon>
-          </a>
-          <a href="/login" class="global-site">Login</a>
-        </div>
-      </nav>
-    </header>
 
-    <section class="hero">
-      <div class="hero-item" v-for="(item, index) in heroItems" :key="index">
-        <img :src="item.image" class="hero-img" />
-        <div class="hero-overlay">
-          <h2>{{ item.title }}</h2>
-          <p>{{ item.subtitle }}</p>
+    
+
+    <section class="club-intro" id="club-intro">
+      <h2 class="club-intro-title">クラブ紹介</h2>
+
+        <div class="club-intro-content">
+
+          <p class="club-intro-subtitle"> 
+            About Tokyo Seigo Club
+          </p>
+
+          <p class="club-intro-text">
+            東京青合クラブは、文化交流・学術活動・社会貢献を目的とした団体です。
+            多様なバックグラウンドを持つメンバーが集い、プロジェクトやイベントを通じて
+            相互理解と成長を目指しています。
+          </p>
+
+          <p class="club-intro-text">
+            本クラブでは、研究発表、勉強会、交流イベントなどを定期的に開催し、
+            個人・団体双方にとって価値ある活動の場を提供しています。
+          </p>
         </div>
-      </div>
-    </section>
+      </section>  
 
-    <section class="memorial">
-      <img src="/images/2025 花冈.jpg" alt="memorial" />
-      <div class="memorial-text">
-        <h2>2025<br>&nbsp;&nbsp; 花岡平和記念</h2>
-      </div>
-    </section>
-
-    <section class="cards">
+    <section class="cards" id="activities">
       <h2 class="section-title">活動・プロジェクト</h2>
 
       <el-row :gutter="40" v-loading="isLoadingActivities">
@@ -47,9 +34,10 @@
             <div class="card-img-container">
               <img :src="activity.coverImageUrl" class="card-img" />
 
-              <a :href="`/blog/${activity.id}`" class="card-button-overlay">
-                詳しくはこちら <span class="arrow">></span>
-              </a>
+              <router-link :to="`/blog/${activity.id}`" class="card-button-overlay">
+                詳しくはこちら >
+              </router-link>
+
             </div>
             <div class="card-content">
               <h3>{{ activity.title }}</h3>
@@ -60,7 +48,7 @@
       </el-row>
     </section>
 
-    <section class="news">
+    <section class="news" id="news">
 
       <div class="news-title-container">
         <h2 class="news-title">ニュース</h2>
@@ -144,6 +132,8 @@
   </div>
 </template>
 
+------------------------------------------------------------------
+
 <script setup lang="ts">
 // 导入 Element Plus 图标
 
@@ -181,13 +171,29 @@ const formatNewsDate = (isoDate: string): string => {
 const activities = ref<any[]>([]); // 存储置顶活动
 const isLoadingActivities = ref(true);
 
+const NAVBAR_HEIGHT = 72; // 与你的 navbar 实际高度一致
+
+const scrollToSection = (id: string) => {
+  const el = document.getElementById(id);
+  if (!el) return;
+
+  const y =
+    el.getBoundingClientRect().top +
+    window.pageYOffset -
+    NAVBAR_HEIGHT;
+
+  window.scrollTo({
+    top: y,
+    behavior: 'smooth'
+  });
+};
 
 
 // onMounted 会在组件加载时自动运行
 onMounted(async () => {
   // 1. 显示日语提示消息 (10s 后消失)
   ElMessage({
-    message: 'ご訪問ありがとうございます。トラフィック制限により、データが表示されない場合があります。現在バックエンドシステムを起動中です。30秒ほどお待ちください。',
+    message: 'ご訪問ありがとうございます。トラフィック制限により、データが表示されない場合があります。現在バックエンドシステムを起動中です。5-10秒ほどお待ちください。',
     type: 'warning',
     duration: 10000, // 10 秒
     showClose: false,
@@ -227,165 +233,56 @@ onMounted(async () => {
 //#endregion
 
 
-const heroItems = [
-  { title: "GROUPS", subtitle: "団体の方へ", image: "/images/团体.jpg" },
-  { title: "INDIVIDUAL", subtitle: "個人の方へ", image: "/images/个人.jpg" },
-  { title: "INFORMATION", subtitle: "団体情報", image: "/images/团体情报.jpg" },
-];
-
-
-
-
-
 </script>
+
+----------------------------------
 
 <style scoped>
 .home {
   font-family: 'Noto Sans JP', sans-serif;
   color: #333;
+  padding-top: 120px;
 }
 
 /* 顶部导航栏 */
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 5%;
-  background-color: #000;
-  color: white;
-  z-index: 10;
-  box-sizing: border-box;
+
+
+----------------------------------
+
+.club-intro {
+  max-width: 1200px;
+  margin: 0 auto 100px;
+  padding: 0 20px;
 }
 
-.logo {
-  height: 70px;
-  width: auto;
+.club-intro-title {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #333;
 }
 
-.navbar-right {
-  display: flex;
-  align-items: center;
+.club-intro-subtitle {
+  text-align: center;
+  color: #999;
+  margin-bottom: 30px;
+  letter-spacing: 0.08em;
 }
 
-.navbar-right a {
-  color: white;
-  text-decoration: none;
-  font-weight: 300;
-  font-size: 1.2rem;
-  margin-left: 10px;
-  margin-right: 60px;
+.club-intro-content {
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-.navbar-right a:hover {
-  color: #f4d03f;
-}
-
-.nav-icon {
-  font-size: 1.2rem;
-  vertical-align: middle;
-}
-
-.global-site {
-  border-left: 1px solid #ccc;
-  padding-left: 20px;
-}
-
-/* Hero Section */
-.hero {
-  display: flex;
-  width: 100%;
-  height: 80vh;
-}
-
-.hero-item {
-  flex: 1;
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-}
-
-.hero-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: brightness(60%);
-  transition: transform 0.5s, filter 0.3s;
-}
-
-.hero-item:hover .hero-img {
-  transform: scale(1.05);
-  filter: brightness(75%);
-}
-
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: clamp(10px, 3vw, 40px);
+.club-intro-text {
+  font-size: 1.05rem;
+  line-height: 1.9;
+  color: #555;
+  margin-bottom: 20px;
   text-align: center;
 }
 
-.hero-overlay h2 {
-  font-size: clamp(1.6rem, 5vw, 2.8rem);
-  font-weight: 700;
-  letter-spacing: clamp(0.5px, 0.6vw, 2px);
-  line-height: clamp(1.1, 1.3, 1.4);
-  text-shadow: 0 clamp(1px, 0.4vw, 2px) clamp(3px, 0.8vw, 5px) rgba(0, 0, 0, 0.6);
-}
-
-.hero-overlay p {
-  font-size: clamp(0.9rem, 3vw, 1.2rem);
-  margin-top: clamp(5px, 1.5vw, 15px);
-  font-weight: 500;
-  line-height: 1.4;
-  text-shadow: 0 clamp(1px, 0.3vw, 2px) clamp(2px, 0.7vw, 4px) rgba(0, 0, 0, 0.6);
-}
-
-.hero-overlay p::after {
-  content: ' >';
-  font-weight: bold;
-  margin-left: 0.4em;
-  font-size: 1em;
-}
-
-/* 纪念图 */
-.memorial {
-  position: relative;
-  margin: 0;
-}
-
-.memorial img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  filter: brightness(70%);
-  vertical-align: bottom;
-}
-
-.memorial-text {
-  position: absolute;
-  color: white;
-  top: clamp(45%, 65%, 70%);
-  left: clamp(10%, 18vw, 22%);
-  font-size: clamp(1.2rem, 5vw, 3.5rem);
-  line-height: clamp(1.2, 1.6vw, 1.8);
-  font-weight: 400;
-  font-family: 'Yu Mincho', 'YuMincho', 'Hiragino Mincho ProN',
-    'MS PMincho', 'Noto Serif JP', serif;
-  font-style: oblique;
-  font-kerning: inherit;
-  letter-spacing: clamp(0.5px, 0.6vw, 2px);
-  text-shadow: 0 clamp(1px, 0.5vw, 2px) clamp(4px, 1vw, 5px) rgba(0, 0, 0, 0.7);
-  transform: translateY(-50%);
-}
 
 
 /* 活动卡片区域 */
@@ -948,7 +845,6 @@ const heroItems = [
     font-size: 22.4px !important;
     margin-bottom: 10px !important;
   }
-
 
 
 }

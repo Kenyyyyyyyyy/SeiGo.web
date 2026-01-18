@@ -1,7 +1,7 @@
 <template>
   <div class="manage-blogs-container">
     <div class="header">
-      <el-button @click="router.back()">
+      <el-button @click="router.push('/AdminPage')" type="text" size="large">
         <el-icon>
           <ArrowLeft />
         </el-icon>
