@@ -65,7 +65,7 @@
 import { ref, reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
-import axios from 'axios'
+import axiosInstance from '../http/index';
 
 const router = useRouter()
 const formRef = ref()
@@ -100,7 +100,7 @@ const fetchCaptcha = async () => {
   loadingCaptcha.value = true
   try {
     // 增加 _t 参数，强制浏览器跳过缓存
-    const res = await axios.get(`/api/Message/captcha?_t=${new Date().getTime()}`)
+    const res = await axiosInstance.get(`/api/Message/captcha?_t=${new Date().getTime()}`)
     if (res.data.resultCode === 200) {
       captchaQuestion.value = res.data.resultData.question
       captchaKey.value = res.data.resultData.captchaKey
@@ -131,7 +131,7 @@ const submitForm = async () => {
           captchaAnswer: form.captchaAnswer
         }
 
-        const res = await axios.post('/api/Message', payload)
+        const res = await axiosInstance.post('/api/Message', payload)
         
         if (res.data.resultCode === 200) {
           ElMessage({
