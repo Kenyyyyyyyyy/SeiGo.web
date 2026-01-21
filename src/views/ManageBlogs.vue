@@ -12,7 +12,6 @@
 
     <el-card class="table-card">
       <el-table v-if="!isMobile" :data="blogs" v-loading="loading" style="width: 100%">
-
         <el-table-column type="expand">
           <template #default="props">
             <div class="summary-content">
