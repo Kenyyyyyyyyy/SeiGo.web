@@ -8,43 +8,63 @@ let list = [
         path: "/",
         component: () => import("../views/HomePage.vue")
     },
+
+    {
+        path: '/contact',
+        name: 'Contact',
+        component: () => import('../views/Contact.vue') // 确保路径正确
+    },
+
     {
         name: "login",
         path: "/login",
         component: () => import("../views/LoginPage.vue")
     },
+
     {
         name: "crud", // 这是你的 AdminPage
         path: "/AdminPage",
         component: () => import("../views/AdminCRUDPage.vue"),
         meta: { requiresAuth: true } // 2. 添加路由保护
     },
-    // 3. (!!!) 添加 CreateBlog 路由 (!!!)
+
+    
     {
         name: "CreateBlog",
         path: "/AdminPage/create-blog", // 我把它设为 AdminPage 的子路径
         component: () => import("../views/CreateBlog.vue"),
         meta: { requiresAuth: true } // 4. 同样添加路由保护
     },
+
     {
         name: "ManageBlogs",
         path: "/AdminPage/manage", // (新路径)
         component: () => import("../views/ManageBlogs.vue"), // (新组件)
         meta: { requiresAuth: true }
     },
+
     {
         name: "EditBlog",
         path: "/AdminPage/edit/:id",
         component: () => import("../views/CreateBlog.vue"),
         meta: { requiresAuth: true }
     },
+
     {
         name: "ManageTypes",
         path: "/AdminPage/manage-types", // 新增类型管理路径
         component: () => import("../views/ManageTypes.vue"),
         meta: { requiresAuth: true }
     },
-    // (!!!) 新增博客详情页路由 (!!!)
+
+    {
+        path: '/AdminPage/messages',
+        name: 'MessageManage',
+        component: () => import('../views/MessageManage.vue'),
+        // 建议加上之前的路由守卫逻辑，确保只有管理员能进入
+        meta: { requiresAuth: true }
+    },
+
     {
         name: "BlogDetail",
         path: "/blog/:id",

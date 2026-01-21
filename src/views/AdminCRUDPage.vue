@@ -40,6 +40,13 @@
         </el-button>
       </router-link>
 
+      <router-link to="/AdminPage/messages">
+        <el-button type="success" size="large">
+          <el-icon><ChatDotRound /></el-icon>
+          查看留言反馈
+        </el-button>
+      </router-link>
+
     </div>
 
   </div>

@@ -4,23 +4,36 @@
     
 
     <section class="club-intro" id="club-intro">
-      <h2 class="club-intro-title">クラブ紹介</h2>
+      <h2 class="club-intro-title">青合クラブ</h2>
 
         <div class="club-intro-content">
 
           <p class="club-intro-subtitle"> 
-            About Tokyo Seigo Club
+            民間の力で、中日を繋ごう
           </p>
 
           <p class="club-intro-text">
-            東京青合クラブは、文化交流・学術活動・社会貢献を目的とした団体です。
-            多様なバックグラウンドを持つメンバーが集い、プロジェクトやイベントを通じて
-            相互理解と成長を目指しています。
+            2023年、青合クラブは、日本と中国の青年有志によって設立されました<br>
+            現在では、その活動の輪は<b>関東</b>・<b>関西</b>・<b>中部</b>地域へと着実に広がっています
           </p>
 
           <p class="club-intro-text">
-            本クラブでは、研究発表、勉強会、交流イベントなどを定期的に開催し、
-            個人・団体双方にとって価値ある活動の場を提供しています。
+            私たちは、変動の激しい時代だからこそ、若い世代が歴史の記憶を正面から受け止め<br>
+            次の時代へと継承していくことが重要であると考えています<br>
+            草の根の交流を通じて社会に貢献し、日中友好の基盤となる「民間の絆」を育み、より確かなものにしていくこと<br>
+            それが私たちの目的です
+          </p>
+
+          <p class="club-intro-text">
+            過去に真摯に向き合い、平和な未来を共に構想し、行動しようとする若者たちが集う場<br>
+            それが青合クラブです
+          </p>
+
+          <p class="club-intro-text">
+            日本の若い世代との交流を希望される個人の方々<br>
+            また日中間における歴史的公正の追求や民間交流の促進に取り組まれている団体・組織の皆様との連携を<br>
+            私たちは大切にしています。活動にご関心をお持ちの方は<br>
+            どうぞお気軽にお問い合わせください
           </p>
         </div>
       </section>  
@@ -53,7 +66,6 @@
       <div class="news-title-container">
         <h2 class="news-title">ニュース</h2>
         <el-icon class="news-icon">
-          <Rss />
         </el-icon>
       </div>
 
@@ -141,7 +153,7 @@
 // script setup lang="ts"
 import { ref, onMounted } from 'vue' // 1. 导入 computed
 // 2. 导入新图标
-import { Search, ArrowRight, TopRight } from "@element-plus/icons-vue";
+import { ArrowRight, TopRight } from "@element-plus/icons-vue";
 import { ElMessage } from 'element-plus'; // 导入 ElMessage
 
 import { getLatestNews, getPinnedBlogs } from '../http/blogService';
@@ -195,7 +207,7 @@ onMounted(async () => {
   ElMessage({
     message: 'ご訪問ありがとうございます。トラフィック制限により、データが表示されない場合があります。現在バックエンドシステムを起動中です。5-10秒ほどお待ちください。',
     type: 'warning',
-    duration: 10000, // 10 秒
+    duration: 5000, // 10 秒
     showClose: false,
     offset: 110, // 设置偏移量，使其出现在导航栏下方
   });
@@ -241,7 +253,7 @@ onMounted(async () => {
 .home {
   font-family: 'Noto Sans JP', sans-serif;
   color: #333;
-  padding-top: 120px;
+  padding-top: 20px;
 }
 
 /* 顶部导航栏 */
@@ -266,12 +278,14 @@ onMounted(async () => {
 .club-intro-subtitle {
   text-align: center;
   color: #999;
+  font-size: 1.3rem;
+  font-style: italic;
   margin-bottom: 30px;
   letter-spacing: 0.08em;
 }
 
 .club-intro-content {
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 
@@ -281,6 +295,7 @@ onMounted(async () => {
   color: #555;
   margin-bottom: 20px;
   text-align: center;
+  
 }
 
 
@@ -553,6 +568,11 @@ onMounted(async () => {
 
 <style scoped>
 @media (max-width: 767px) {
+
+.home {
+  padding-top: 0px;
+}
+
   .el-table {
     display: none;
   }
@@ -846,6 +866,10 @@ onMounted(async () => {
     margin-bottom: 10px !important;
   }
 
+  .footer {
+    padding: 20px 4% !important;
+    text-align: center;
+  }
 
 }
 </style>

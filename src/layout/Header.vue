@@ -9,6 +9,7 @@
         <a @click.prevent="scroll('club-intro')">クラブ紹介</a>
         <a @click.prevent="scroll('activities')">活動・プロジェクト</a>
         <a @click.prevent="scroll('news')">ニュース</a>
+        <router-link to="/contact" class="nav-item-link">お問い合わせ</router-link>
       </div>
 
       <div class="navbar-actions">
@@ -47,7 +48,6 @@ const scroll = async (id: string) => {
 
 <style scoped>
     .navbar {
-  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -72,6 +72,16 @@ const scroll = async (id: string) => {
 .logo-link {
   display: inline-flex;
   align-items: center;
+}
+
+.nav-item-link {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+.nav-item-link:hover {
+  color: #409eff; /* 或者你主题的颜色 */
 }
 
 .navbar-right {
@@ -102,4 +112,42 @@ const scroll = async (id: string) => {
   padding-left: 20px;
 }
 
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 3px 10px !important;
+  }
+
+  .navbar-left {
+    margin: 0px;
+  }
+
+  .navbar-right a {
+    padding: 4px 3px;  
+  }
+  .nav-item-links {
+    flex-wrap: nowrap;
+  }
+  .nav-item-link {
+    width: 100%;       
+    display: block;    
+    text-align: center;
+    flex-wrap: wrap !important;
+  }
+
+  .navbar-right a {
+    margin-left: 1.5vw !important;
+    margin-right: 1.5vw !important;
+    font-size: 1rem;
+  }
+
+  .logo {
+    height: 60px;
+  }
+
+  .global-site {
+    padding-left: 20px !important;
+    margin-top: 0px !important;
+  }
+}
 </style>

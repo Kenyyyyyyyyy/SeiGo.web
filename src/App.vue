@@ -14,7 +14,7 @@ const route = useRoute()
 const showHeader = computed(() => {
   // 注意：'BlogDetail' 必须与路由配置中的 name 严格一致
   const activeName = route.name as string
-  return ['home', 'BlogDetail'].includes(activeName)
+  return ['home', 'BlogDetail','Contact'].includes(activeName)
 })
 </script>
 

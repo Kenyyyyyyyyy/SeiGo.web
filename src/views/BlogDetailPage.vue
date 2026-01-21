@@ -306,6 +306,26 @@ onMounted(async () => {
   margin-bottom: 20px;
 }
 
+.blog-html-content :deep(iframe),
+.blog-html-content :deep(video) {
+  display: block;
+  margin: 40px auto !important; /* 强制水平居中并增加上下间距 */
+  width: 100% !important;        /* 响应式宽度 */
+  max-width: 850px !important;   /* 电脑端最大宽度 */
+  aspect-ratio: 16 / 9;          /* 锁定 16:9 比例 */
+  height: auto !important;       /* 覆盖掉 YouTube 默认的 height="315" */
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  border: none;
+}
+
+/* 处理不支持 aspect-ratio 的旧浏览器 */
+@supports not (aspect-ratio: 16 / 9) {
+  .blog-html-content :deep(iframe) {
+    height: 480px; 
+  }
+}
+
 /* 移动端适配 */
 @media (max-width: 767px) {
   .navbar {
@@ -313,42 +333,11 @@ onMounted(async () => {
     align-items: flex-start;
     padding: 5px 4% !important;
   }
-
-  .navbar-left {
-    margin-bottom: 10px;
-  }
-
-  .navbar-right {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .navbar-right a {
-    margin: 5px 10px 5px 0;
-    font-size: 0.95rem !important;
-    line-height: 1.2;
-    padding: 6px 0;
-    margin-right: 20px !important;
-  }
-
-  .navbar-actions {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-  }
-
-  .nav-icon {
-    margin-right: 10px;
-  }
-
-  .logo {
-    height: 44px;
-    margin-top: 4px;
-  }
+  
+  /* ... 这里保留你之前的其他移动端样式 ... */
 
   .blog-content-main {
-    padding: 180px 5% 40px; /* 调整顶部内边距以适应移动端导航栏高度 */
+    padding: 180px 5% 40px; 
   }
 
   .blog-title {
@@ -363,6 +352,11 @@ onMounted(async () => {
 
   .blog-html-content {
     font-size: 1rem;
+  }
+
+  /* 移动端微调：减小视频边距 */
+  .blog-html-content :deep(iframe) {
+    margin: 20px auto !important;
   }
 }
 </style>
