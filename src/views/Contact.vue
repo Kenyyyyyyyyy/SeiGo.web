@@ -99,13 +99,14 @@ const rules = {
 const fetchCaptcha = async () => {
   loadingCaptcha.value = true
   try {
-    const res = await axios.get('/api/Message/captcha')
+    // 增加 _t 参数，强制浏览器跳过缓存
+    const res = await axios.get(`/api/Message/captcha?_t=${new Date().getTime()}`)
     if (res.data.resultCode === 200) {
       captchaQuestion.value = res.data.resultData.question
       captchaKey.value = res.data.resultData.captchaKey
     }
   } catch (error) {
-    ElMessage.error('验证码加载失败')
+    console.error('Captcha load failed:', error)
   } finally {
     loadingCaptcha.value = false
   }
