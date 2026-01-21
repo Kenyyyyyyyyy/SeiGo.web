@@ -74,7 +74,16 @@ let list = [
 
 const router = createRouter({
     history: createWebHistory(),
-    routes: list
+    routes: list ,
+    scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      // 如果是通过浏览器的“后退”按钮返回，则恢复之前的滚动位置
+      return savedPosition;
+    } else {
+      // 否则，所有的跳转都滚动到页面顶部
+      return { top: 0, behavior: 'smooth' }; // 'smooth' 是平滑滚动，如果你想要瞬间跳转可以改为 'auto'
+    }
+  }
 })
 
 router.beforeEach((to, _from, next) => {

@@ -110,9 +110,7 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-/* ------------------------------------------------------------------- */
-/* 从 HomePage.vue 复制的样式 - 导航栏和页脚 */
-/* ------------------------------------------------------------------- */
+
 
 .blog-detail-page {
   font-family: 'Noto Sans JP', sans-serif;
@@ -183,7 +181,7 @@ onMounted(async () => {
 /* ------------------------------------------------------------------- */
 
 .blog-content-main {
-  padding: 120px 10% 80px; /* 顶部留出导航栏空间 */
+  padding: 10px 10% 80px; /* 顶部留出导航栏空间 */
   min-height: 80vh;
   max-width: 1200px;
   margin: 0 auto;
@@ -328,16 +326,12 @@ onMounted(async () => {
 
 /* 移动端适配 */
 @media (max-width: 767px) {
-  .navbar {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 5px 4% !important;
-  }
+  
   
   /* ... 这里保留你之前的其他移动端样式 ... */
 
   .blog-content-main {
-    padding: 180px 5% 40px; 
+    padding: 10px 5% 40px; 
   }
 
   .blog-title {

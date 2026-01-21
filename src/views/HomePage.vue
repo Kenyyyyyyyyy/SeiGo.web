@@ -204,13 +204,13 @@ const scrollToSection = (id: string) => {
 // onMounted 会在组件加载时自动运行
 onMounted(async () => {
   // 1. 显示日语提示消息 (10s 后消失)
-  ElMessage({
-    message: 'ご訪問ありがとうございます。トラフィック制限により、データが表示されない場合があります。現在バックエンドシステムを起動中です。5-10秒ほどお待ちください。',
-    type: 'warning',
-    duration: 5000, // 10 秒
-    showClose: false,
-    offset: 110, // 设置偏移量，使其出现在导航栏下方
-  });
+  // ElMessage({
+  //   message: 'ご訪問ありがとうございます。トラフィック制限により、データが表示されない場合があります。現在バックエンドシステムを起動中です。5-10秒ほどお待ちください。',
+  //   type: 'warning',
+  //   duration: 5000, // 10 秒
+  //   showClose: false,
+  //   offset: 110, // 设置偏移量，使其出现在导航栏下方
+  // });
 
   isLoadingNews.value = true;
   isLoadingActivities.value = true; // 1. 开始加载
