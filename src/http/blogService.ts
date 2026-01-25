@@ -194,3 +194,11 @@ export const deleteBlog = async (id: number) => {
 export const deleteImageApi = (publicId: string) => {
   return axiosInstance.delete(`/api/FileUpload/DeleteImage`, { params: { publicId } });
 };
+
+
+export const getBlogByPage = async (page: number, size: number) => {
+  const res = await axiosInstance.get('/api/BlogNews/GetBlogByPage', {
+    params: { page, Size: size }
+  });
+  return res.data; // 返回的是 ApiResultHelper 包装后的对象
+}

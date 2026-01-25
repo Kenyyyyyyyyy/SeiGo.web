@@ -6,8 +6,8 @@
 
     <nav class="navbar-right">
       <div class="navbar-links">
-        <a @click.prevent="scroll('club-intro')">クラブ紹介</a>
-        <a @click.prevent="scroll('activities')">活動・プロジェクト</a>
+        <a @click.prevent="scroll('club-intro')">青合クラブ</a>
+        <a @click.prevent="scroll('activities')">重要活動</a>
         <a @click.prevent="scroll('news')">ニュース</a>
         <router-link to="/contact" class="nav-item-link">お問い合わせ</router-link>
       </div>

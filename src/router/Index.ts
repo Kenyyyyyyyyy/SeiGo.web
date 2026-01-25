@@ -66,6 +66,12 @@ let list = [
     },
 
     {
+        path: '/news-list',
+        name: 'NewsList',
+        component: () => import('../views/BlogList.vue')
+    },
+
+    {
         name: "BlogDetail",
         path: "/blog/:id",
         component: () => import("../views/BlogDetailPage.vue")
