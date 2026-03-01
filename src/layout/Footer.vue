@@ -19,7 +19,7 @@
         </div>
         <div class="copyright">
           <p>東京青合クラブ</p>
-          <p>© 2025 TOKYO SEIGO CLUB</p>
+          <p>© 2025 TOKYO SEIGOU CLUB</p>
         </div>
       </div>
 

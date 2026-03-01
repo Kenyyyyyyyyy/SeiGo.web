@@ -1,10 +1,20 @@
 {
-
   "rewrites": [
-    { "source": "/(.*)", "destination": "/" }
+    {
+      "source": "/sitemap.xml",
+      "destination": "https://seigou-api.fly.dev/sitemap.xml"
+    },
+    {
+      "source": "/robots.txt",
+      "destination": "/robots.txt" 
+    },
+    { 
+      "source": "/(.*)", 
+      "destination": "/" 
+    }
   ],
   "env": {
-    "VITE_API_BASE_URL": "https://seigou-webapi.onrender.com"
+    "VITE_API_BASE_URL": "https://seigou-api.fly.dev"
   },
   "buildCommand": "pnpm run build",
   "outputDirectory": "dist",
