@@ -18,8 +18,8 @@
           <a href="#">クッキーノーティス</a>
         </div>
         <div class="copyright">
-          <p>東京青合クラブ</p>
-          <p>© 2025 TOKYO SEIGOU CLUB</p>
+          <p>青合クラブ</p>
+          <p>© 2026 SEIGOU CLUB</p>
         </div>
       </div>
 
