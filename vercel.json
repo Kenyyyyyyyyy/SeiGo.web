@@ -14,7 +14,8 @@
     }
   ],
   "env": {
-    "VITE_API_BASE_URL": "https://seigou-api.fly.dev"
+    "VITE_API_BASE_URL": "https://seigou-api.fly.dev",
+    "CHROME_PATH": "/usr/bin/chromium"
   },
   "buildCommand": "pnpm run build:prerender",
   "outputDirectory": "dist",

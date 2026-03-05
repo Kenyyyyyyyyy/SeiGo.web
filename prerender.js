@@ -16,10 +16,24 @@ const routes = [
 async function prerender() {
   console.log('Starting prerender process...');
 
+  // Vercel 环境配置
+  const isVercel = process.env.VERCEL === '1';
+  console.log(`Environment: ${isVercel ? 'Vercel' : 'Local'}`);
+
   // 启动浏览器
   const browser = await puppeteer.launch({
     headless: 'new',
-    args: ['--no-sandbox', '--disable-setuid-sandbox']
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage',
+      '--disable-gpu',
+      '--no-first-run',
+      '--no-zygote',
+      '--single-process'
+    ],
+    // Vercel 环境需要指定可执行路径
+    executablePath: isVercel ? process.env.CHROME_PATH : undefined
   });
 
   try {
