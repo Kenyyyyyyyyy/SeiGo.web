@@ -115,16 +115,41 @@ const scroll = async (id: string) => {
 
 @media (max-width: 768px) {
   .navbar {
-    padding: 3px 10px !important;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 5px 4% !important;
+    
   }
 
   .navbar-left {
-    margin: 0px;
+    margin-bottom: 10px;
+    margin: auto !important;
+  }
+
+  .navbar-right {
+    flex-direction: column;
+    align-items: flex-start;
+    margin: auto !important;
   }
 
   .navbar-right a {
-    padding: 4px 3px;  
+    margin: 5px 10px 5px 0;
+    font-size: 0.95rem !important;
+    line-height: 1.2;
+    padding: 6px 0;
+    margin-right: 20px !important;  
   }
+
+  .navbar-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    /* ✅ 搜索与登录之间用 gap 替代竖线 */
+    font-size: 1rem;
+    margin: auto !important;
+  }
+
   .nav-item-links {
     flex-wrap: nowrap;
   }
@@ -135,19 +160,20 @@ const scroll = async (id: string) => {
     flex-wrap: wrap !important;
   }
 
-  .navbar-right a {
-    margin-left: 1.5vw !important;
-    margin-right: 1.5vw !important;
-    font-size: 1rem;
+  .nav-icon {
+    margin-right: 10px;
+    margin: auto !important;
   }
 
   .logo {
-    height: 60px;
+    height: 44px;
+    margin: auto !important;
+    
   }
 
   .global-site {
     padding-left: 20px !important;
-    margin-top: 0px !important;
+    margin: auto !important;
   }
 }
 </style>
