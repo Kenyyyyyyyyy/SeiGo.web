@@ -1,0 +1,26 @@
+model_list:
+  - model_name: claude-sonnet-4-6
+    litellm_params:
+      model: deepseek/deepseek-chat
+      api_key: "sk-fd5a9e01851141b8b86fe6c24e230b8a"
+      api_base: "https://api.deepseek.com/v1"
+      max_tokens: 8000
+
+  - model_name: claude-haiku-4-5-20251001
+    litellm_params:
+      model: deepseek/deepseek-chat
+      api_key: "sk-fd5a9e01851141b8b86fe6c24e230b8a"
+      api_base: "https://api.deepseek.com/v1"
+      max_tokens: 8000
+
+litellm_settings:
+  drop_params: true
+  modify_params: true      
+  max_tokens: 8000  
+
+router_settings:
+  model_group_alias:
+    claude-sonnet-4-6: claude-sonnet-4-6
+
+general_settings:
+  max_tokens: 8000

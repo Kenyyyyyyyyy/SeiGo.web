@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /AdminPage
+Disallow: /login
 
 Sitemap: https://seigou.org/sitemap.xml

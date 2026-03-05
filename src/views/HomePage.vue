@@ -2,7 +2,7 @@
   <div class="home">
 
     <section class="club-intro" id="club-intro">
-      <h2 class="club-intro-title">青合クラブ</h2>
+      <h1 class="club-intro-title">青合クラブ</h1>
 
         <div class="club-intro-content">
 
@@ -220,20 +220,15 @@ onMounted(async () => {
 
 </script>
 
-----------------------------------
-
 <style scoped>
+/* ===== 基础样式 ===== */
 .home {
   font-family: 'Noto Sans JP', sans-serif;
   color: #333;
   padding-top: 20px;
 }
 
-/* 顶部导航栏 */
-
-
-----------------------------------
-
+/* ===== 青合クラブ介绍区域 ===== */
 .club-intro {
   max-width: 1200px;
   margin: 0 auto 100px;
@@ -268,59 +263,43 @@ onMounted(async () => {
   color: #555;
   margin-bottom: 20px;
   text-align: center;
-  
 }
 
-
-
-/* 活动卡片区域 */
-/* 活動・プロジェクト整体 */
+/* ===== 活动卡片区域 ===== */
 .cards {
   padding: 40px 10%;
-  /* 增加上下内边距 */
   background: #f8f9fb;
 }
 
 .cards .section-title {
   text-align: center;
   margin-bottom: 50px;
-  /* 增加标题下边距 */
   font-size: 2.2rem;
-  /* 增大标题字体 */
   font-weight: 700;
   color: #333;
 }
 
 .el-row {
-  margin: 0 !important  ;
-  
+  margin: 0 !important;
 }
 
 .card-wrapper {
   margin-bottom: 40px;
-  /* 卡片之间的垂直间距 */
   display: flex;
-  /* 让 el-col 内部的 card-item 也能撑满高度 */
 }
 
 .card-item {
   width: 100%;
-  /* 确保卡片撑满列宽 */
   text-align: left;
-  /* 默认左对齐 */
-  padding: 20px ;
-  /* 移除 el-card 默认 padding */
+  padding: 20px;
   border-radius: 8px;
-  /* 圆角 */
   overflow: hidden;
-  /* 确保图片圆角和按钮位置 */
 }
 
 .card-img-container {
   position: relative;
   width: 100%;
   height: 280px;
-  /* 调整图片高度，可以根据需求微调 */
   overflow: hidden;
 }
 
@@ -328,18 +307,15 @@ onMounted(async () => {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* 确保图片填充容器并居中 */
   transition: transform 0.3s ease-in-out;
 }
 
 .card-item:hover .card-img {
   transform: scale(1.05);
-  /* 悬停时图片轻微放大 */
 }
 
 .card-content {
   padding: 20px;
-  /* 内容区域内边距 */
 }
 
 .card-content h3 {
@@ -354,7 +330,6 @@ onMounted(async () => {
   line-height: 1.6;
   color: #666;
   min-height: 60px;
-  /* 确保描述区域有最小高度 */
 }
 
 /* 详细按钮样式 */
@@ -364,7 +339,6 @@ onMounted(async () => {
   left: 0;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.7);
-  /* 半透明黑色背景 */
   color: white;
   padding: 15px 20px;
   font-size: 0.95rem;
@@ -372,29 +346,20 @@ onMounted(async () => {
   text-decoration: none;
   display: flex;
   justify-content: space-between;
-  /* 按钮文字和箭头左右对齐 */
   align-items: center;
-  transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out;
 }
 
 .card-button-overlay:hover {
   background-color: rgba(0, 0, 0, 0.9);
-  /* 悬停时背景更深 */
-  /* transform: translateY(-5px); */
-  /* 可以添加轻微上移效果 */
 }
 
 .card-button-overlay .arrow {
   font-weight: bold;
   font-size: 1.1rem;
-  /* 箭头更大一点 */
 }
 
-/* 新闻区 */
-.news-list-mobile {
-  display: none;
-}
-
+/* ===== 新闻区域 ===== */
 .news {
   padding: 60px 10%;
   background: #fff;
@@ -419,6 +384,11 @@ onMounted(async () => {
   transform: translateY(-50%);
   font-size: 1.5rem;
   color: #555;
+}
+
+/* 桌面端新闻表格 */
+.news-list-mobile {
+  display: none;
 }
 
 :deep(.hidden-header) {
@@ -468,31 +438,26 @@ onMounted(async () => {
   color: #007bff;
 }
 
+/* Element Plus 表格样式 */
 .el-table {
   --el-table-border-color: transparent;
 }
 
 :deep(.el-table__row) {
-  height: 50px; /* ✅ 默认约 44px，调高行距 */
+  height: 50px;
 }
 
 :deep(.el-table__cell) {
   padding: 8px 0;
 }
 
-/* 页脚 */
-
-
-
-</style>
-
-<style scoped>
+/* ===== 移动端响应式样式 ===== */
 @media (max-width: 767px) {
+  .home {
+    padding-top: 0;
+  }
 
-.home {
-  padding-top: 0px;
-}
-
+  /* 新闻区域移动端适配 */
   .el-table {
     display: none;
   }
@@ -510,7 +475,6 @@ onMounted(async () => {
     padding-bottom: 10px;
   }
 
-  /* ✅ 日期 + 分类 同行排列 */
   .news-item-header {
     display: flex;
     justify-content: space-between;
@@ -523,7 +487,6 @@ onMounted(async () => {
     color: #888;
   }
 
-  /* ✅ 分类按钮化 */
   .news-item-category {
     font-size: 0.75rem;
     color: #007bff;
@@ -546,36 +509,20 @@ onMounted(async () => {
     color: #007bff;
   }
 
-  .copyright {
-    text-align: center;
-    /* ✅ 再次确认文字本身居中 */
-    width: 100%;
-    /* ✅ 占满父容器宽度以正确居中 */
-    font-size: 0.8rem;
-    color: #aaa;
-    line-height: 1.6;
-    margin-top: 10px;
-  }
-
-  .copyright p {
-    margin: 0;
-  }
-
+  /* 活动卡片区域移动端适配 */
   .cards {
-    padding: 60px 6%; /* 与桌面端 80px 10% 成比例缩小 */
+    padding: 60px 6%;
     background: #f8f9fb;
   }
 
-  /* 标题 */
   .cards .section-title {
     text-align: center;
-    margin-bottom: 40px; /* 桌面 50px → 稍小 */
-    font-size: 1.8rem; /* 桌面 2.2rem → 等比例缩放 */
+    margin-bottom: 40px;
+    font-size: 1.8rem;
     font-weight: 700;
     color: #333;
   }
 
-  /* 卡片容器（单列排列） */
   .el-row {
     margin: 0 !important;
     justify-content: center;
@@ -588,16 +535,15 @@ onMounted(async () => {
   }
 
   .card-wrapper {
-    margin-bottom: 10px; /* 桌面 40px → 轻微缩短 */
+    margin-bottom: 10px;
     display: flex;
     justify-content: center;
   }
 
-  /* 卡片本体（保持桌面比例，但整体略缩） */
   .card-item {
     width: 95%;
     text-align: left;
-    padding: 0px; /* 桌面 20px → 缩小比例 */
+    padding: 0;
     border-radius: 8px;
     overflow: hidden;
     background: #fff;
@@ -610,11 +556,10 @@ onMounted(async () => {
     box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
   }
 
-  /* 图片部分：保持高度比例一致 */
   .card-img-container {
     position: relative;
     width: 100%;
-    height: 240px; /* 桌面 280px → 比例约 85% */
+    height: 240px;
     overflow: hidden;
   }
 
@@ -624,37 +569,34 @@ onMounted(async () => {
     object-fit: cover;
     transition: transform 0.3s ease-in-out;
   }
-  
 
   .card-item:hover .card-img {
     transform: scale(1.05);
   }
 
   :deep(.el-card__body) {
-  padding: 20px 20px 0 20px !important;
-}
+    padding: 20px 20px 0 20px !important;
+  }
 
-  /* 内容部分：等比例缩放字体 */
   .card-content {
-    padding: 10px; /* 桌面 20px */
+    padding: 10px;
     padding-top: 0;
   }
 
   .card-content h3 {
-    font-size: 1.15rem; /* 桌面 1.3rem */
+    font-size: 1.15rem;
     margin-bottom: 8px;
     font-weight: 600;
     color: #333;
   }
 
   .card-content p {
-    font-size: 0.9rem; /* 桌面 0.95rem */
+    font-size: 0.9rem;
     line-height: 1.6;
     color: #666;
-    min-height: 54px; /* 桌面 60px */
+    min-height: 54px;
   }
 
-  /* “詳しくはこちら >” 按钮 */
   .card-button-overlay {
     position: absolute;
     bottom: 0;
@@ -662,8 +604,8 @@ onMounted(async () => {
     width: 100%;
     background-color: rgba(0, 0, 0, 0.7);
     color: white;
-    padding: 12px 18px; /* 桌面 15px 20px */
-    font-size: 0.9rem; /* 桌面 0.95rem */
+    padding: 12px 18px;
+    font-size: 0.9rem;
     font-weight: 500;
     text-decoration: none;
     display: flex;
@@ -678,106 +620,12 @@ onMounted(async () => {
 
   .card-button-overlay .arrow {
     font-weight: bold;
-    font-size: 1rem; /* 桌面 1.1rem */
-  }
-}
-</style>
-
-
-<style >
-@media (max-width: 767px) {
-  .navbar {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 5px 4% !important;
+    font-size: 1rem;
   }
 
-  .navbar-left {
-    margin-bottom: 10px;
-  }
-
-  .navbar-right {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .navbar-right a {
-    margin: 5px 10px 5px 0;
-    font-size: 0.95rem !important;
-    line-height: 1.2;
-    padding: 6px 0;
-    margin-right: 20px !important;
-  }
-
-  .navbar-actions {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    /* ✅ 搜索与登录之间用 gap 替代竖线 */
-  }
-
-  .nav-icon {
-    margin-right: 10px;
-  }
-
-  .logo {
-    height: 44px;
-    margin-top: 4px;
-  }
-
-  .hero {
-    height: 60vh;
-    flex-direction: column;
-    margin-top: 161px;
-  }
-
-  .hero-item {
-    width: 100%;
-    flex: none;
-  }
-
-  .hero-overlay h2 {
-    font-size: clamp(1.2rem, 5vw, 1.8rem);
-  }
-
-  .hero-overlay p {
-    font-size: clamp(0.9rem, 3.5vw, 1.1rem);
-  }
-
-  .cards {
-    margin-top: 0px !important;
-    margin-bottom: 0 !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    padding: 20px 0px !important;
-  }
-
-  .cards .section-title {
-    font-size: 22.4px !important;
-    margin-top: 0px !important;
-    margin-bottom: 20px !important;
-  }
-
-  .el-row {
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    justify-content: center;
-  }
-
-  /* 让列在小屏时占满宽度 */
-  .el-col {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    flex: 0 0 100% !important;
-    max-width: 100% !important;
-  }
-
-  /* 卡片整体宽高比例优化 */
-  
-
+  /* 新闻标题移动端适配 */
   .news {
-    padding: 0px !important;
+    padding: 0 !important;
     margin-bottom: 30px !important;
   }
 
@@ -785,8 +633,6 @@ onMounted(async () => {
     font-size: 22.4px !important;
     margin-bottom: 10px !important;
   }
-
-  
 
 }
 </style>
