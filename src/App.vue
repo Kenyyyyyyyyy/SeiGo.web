@@ -7,24 +7,39 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import Header from '@/layout/Header.vue'
 import Footer from '@/layout/Footer.vue'
+import { defaultSeoForPath, setRobots, setSeo } from '@/utils/seo'
 
 const route = useRoute()
+const publicRouteNames = ['home', 'BlogDetail', 'Contact', 'NewsList']
 
 // App.vue
 const showHeader = computed(() => {
   // 注意：'BlogDetail' 必须与路由配置中的 name 严格一致
   const activeName = route.name as string
-  return ['home', 'BlogDetail','Contact','NewsList'].includes(activeName)
+  return publicRouteNames.includes(activeName)
 })
 
 const showFooter = computed(() => {
   const activeName = route.name as string
-  return ['home', 'BlogDetail','Contact','NewsList'].includes(activeName)
+  return publicRouteNames.includes(activeName)
 })
+
+watch(
+  () => route.fullPath,
+  () => {
+    const activeName = route.name as string
+    const isPublic = publicRouteNames.includes(activeName)
+    setRobots(isPublic ? 'index, follow' : 'noindex, nofollow')
+    if (isPublic) {
+      setSeo(defaultSeoForPath(route.path))
+    }
+  },
+  { immediate: true },
+)
 </script>
 
 

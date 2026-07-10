@@ -3,4 +3,4 @@ Allow: /
 Disallow: /AdminPage
 Disallow: /login
 
-Sitemap: https://seigou.org/sitemap.xml
+Sitemap: https://www.seigou.org/sitemap.xml

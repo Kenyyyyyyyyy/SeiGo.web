@@ -48,6 +48,7 @@ import { ref, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router'
 import { getBlogById } from '../http/blogService';
 import { Search, Calendar, User, ArrowLeft } from "@element-plus/icons-vue";
+import { canonicalUrlForPath, setSeo } from '../utils/seo';
 
 // 复制 BackendBlog 接口定义，避免循环依赖或修改 blogService.ts
 interface BackendBlog {
@@ -88,6 +89,14 @@ onMounted(async () => {
     try {
       const blogData = await getBlogById(Number(id));
       blog.value = blogData;
+      if (blogData) {
+        setSeo({
+          title: `${blogData.title} | Seigou Club`,
+          description: blogData.summary || 'Seigou Club news and activity report.',
+          canonical: canonicalUrlForPath(route.path),
+          image: blogData.coverImageUrl || undefined,
+        });
+      }
     } catch (error) {
       console.error("获取博客详情失败:", error);
     }
